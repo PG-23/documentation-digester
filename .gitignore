@@ -14,7 +14,7 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+/lib/
 lib64/
 parts/
 sdist/
@@ -218,3 +218,14 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# --- Documentation Digester ---
+# Vector DB: rebuilt by running ingest
+chroma_db/
+
+# React UI (Frontend role)
+node_modules/
+
+# OS clutter
+.DS_Store
+Thumbs.db

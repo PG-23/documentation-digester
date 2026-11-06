@@ -1,0 +1,9 @@
+sentence-transformers
+chromadb
+langchain
+langchain-text-splitters
+langchain-chroma
+langchain-huggingface
+fastapi
+uvicorn[standard]
+python-multipart
