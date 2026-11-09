@@ -24,7 +24,7 @@ export const MOCK_SEARCH: SearchResponse = {
             score: 0.67,
             title: 'nodes and scenes',
             section: 'getting started',
-            url: 'http://docs.godotengine.org/en/stable/getting_started/step_by_step/nodes_scenes.html',
+            url: 'http://docs.godotengine.org/en/stable/getting_started/step_by_step/nodes_and_scenes.html',
             source_file: 'nodes_and_scenes.txt',
             chunk_index: 2,
         },
