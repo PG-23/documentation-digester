@@ -24,6 +24,9 @@ def read_documents():
         metadata = sections[0]
         content = sections[1].strip() if len(sections) > 1 else ""
 
+        if len(sections) == 1:
+            print(f"WARNING: {file_path.name} has no CONTENT: line")
+
         title = ""
         source = ""
         category = ""
@@ -38,6 +41,9 @@ def read_documents():
 
             elif line.startswith("CATEGORY:"):
                 category = line.replace("CATEGORY:", "").strip()
+
+        if not title or not source:
+            print(f"WARNING: {file_path.name} is missing TITLE: or SOURCE:")
 
         # Store document information
         documents.append(
@@ -55,21 +61,18 @@ def read_documents():
 
 def create_manifest(documents):
 
-    # Keep metadata without duplicating the full document content
+    # Keyed by file name, with the field names ingest.py and the Search API use
     manifest = {
-        "documents": [
-            {
-                "title": doc["title"],
-                "source": doc["source"],
-                "category": doc["category"],
-                "file": doc["file"],
-            }
-            for doc in documents
-        ]
+        Path(doc["file"]).name: {
+            "title": doc["title"],
+            "section": doc["category"],
+            "url": doc["source"],
+        }
+        for doc in documents
     }
 
     # Save the manifest as JSON
-    MANIFEST_FILE.write_text(json.dumps(manifest, indent=4), encoding="utf-8")
+    MANIFEST_FILE.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
 
     print("Manifest successfully created!")
 

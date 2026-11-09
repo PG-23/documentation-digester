@@ -1,0 +1,19 @@
+Nodes and Scenes
+
+Every Godot game is built from nodes. A node is a small building block with a name, editable properties, callbacks that run every frame, and the ability to have child nodes. Godot ships with many node types: sprites for images, cameras, collision shapes, audio players, timers and user interface controls.
+
+The scene tree
+
+Nodes are arranged in a tree. Each node can have any number of children but only one parent. When a parent node is moved, hidden or deleted, its children follow. The whole running game is one large tree, called the scene tree.
+
+Scenes
+
+A scene is a group of nodes saved together to disk, with one root node at the top. A character scene might hold a body node, a sprite, a collision shape and a camera. Scenes can be instanced inside other scenes, so the same enemy scene can be placed many times in a level.
+
+Creating your first scene
+
+Create a new scene, add a root node such as Label, and set its Text property in the Inspector. Save the scene with Ctrl+S; it is stored as a .tscn file. Press F6 to run the current scene, or set it as the main scene so it runs when the project starts with F5.
+
+Thinking in scenes
+
+Because scenes can contain other scenes, a project is usually split into many small scenes: a player, an enemy, a pickup, a level, and a main menu. Each one can be edited and tested on its own.
