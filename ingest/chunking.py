@@ -104,7 +104,44 @@ def _split_sections(text:str) -> list[tuple[str,str]]:
     flush()
     return sections
          
+# =========== Semantic chunking ========  
+MIN_BODY_ROOM = 200
+def _semantic_pieces(
+    text: str,
+    chunk_size:int = CHUNK_SIZE,
+    chunk_overlap: int = CHUNK_OVERLAP,    
+) -> list[tuple[str,str]]:
+    """Return (heading_path, chunk_text) for every chunk on the page.
+
+    chunk_text already starts with the heading path.
+    """
+    pieces: list[tuple[str,str]] = []
+    for heading, body in _split_sections(text):
+        prefix = f"{heading}\n\n" if heading else ""
+        room = max(chunk_size - len(prefix),MIN_BODY_ROOM)
+
+        if len(body) <= room:
+            parts = [body]
+        else:
+            splitter = RecursiveCharacterTextSplitter(
+                  chunk_size=room,
+                  chunk_overlap = min(chunk_overlap,room // 4),
+                )
+            parts = splitter.split_text(body)
+        for part in parts:
+            pieces.append((heading,prefix + part))
+    return pieces
+
+def semantic_chunker(text:str) -> list[str]:
+    """Split by headings first, then by length inside long sections.
+
+    Same signature as length_chunker in ingest/ingest.py: text -> list of chunk strings.
+    """
+    return [chunk for _, chunk in _semantic_pieces(text)]
+             
             
+         
+       
 
           
 def chunk_page(
@@ -126,6 +163,55 @@ def chunk_page(
                 for i,piece in enumerate(pieces)
         ]
 
+def chunk_page_semantic(
+        text:str,
+        metadata: dict,
+        chunk_size: int = CHUNK_SIZE,
+        chunk_overlap: int = CHUNK_OVERLAP,
+) -> list[Document]:
+    """Like chunk_page, but split by headings and record the heading in metadata."""
+    return [
+         Document(
+            page_content=chunk_text,
+            metadata = {**metadata,"heading":heading,"chunk_index":i},
+        )
+        for i, (heading, chunk_text) in enumerate(
+             _semantic_pieces(text, chunk_size, chunk_overlap)
+        )
+    ]
+
+# =========== One entry point for ingest ========
+CHUNKERS = {
+    "length" : chunk_page,
+    "semantic": chunk_page_semantic,
+}
+
+def chunk(
+    text: str,
+    metadata: dict,
+    strategy: str = "semantic",
+    **kwargs,
+
+) -> list[Document]:
+     
+    """Chunk one page with the chosen strategy ("length" or "semantic").
+
+    Extra kwargs (chunk_size, chunk_overlap) are passed through,
+    so K-2 can try different sizes: chunk(text, meta, "semantic", chunk_size=500)
+    """
+    if strategy not in CHUNKERS:
+        raise ValueError(f"Unknown strategy {strategy!r}, use one of {list(CHUNKERS)}")
+
+    docs = CHUNKERS[strategy] (text,metadata, **kwargs)
+    for d in docs:
+        d.metadata["chunker"] = strategy
+    return docs
+        
+
+
+     
+     
+     
 
 
     
