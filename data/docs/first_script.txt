@@ -1,0 +1,19 @@
+Creating your first script
+
+Scripts add behaviour to nodes. In this lesson you attach a GDScript file to a Sprite2D node and make the Godot icon move in a circle.
+
+Attaching a script
+
+Right-click the Sprite2D node in the Scene dock and choose Attach Script. Keep GDScript as the language and accept the default path. The script editor opens with a file that begins with extends Sprite2D, which means the script can use every property and function of that node type.
+
+Hello, world
+
+Add a function called _init and print a message inside it. _init runs when the node is created in memory, so running the scene prints the message to the Output panel.
+
+Moving the sprite
+
+Declare two member variables at the top of the script: speed for pixels per second and angular_speed for radians per second. Then define _process(delta), which Godot calls every frame. Inside it, add angular_speed multiplied by delta to rotation, build a velocity vector with Vector2.UP.rotated(rotation) multiplied by speed, and add velocity multiplied by delta to position. Multiplying by delta keeps the movement the same regardless of the frame rate.
+
+Next steps
+
+The next lesson shows how to read player input so that the arrow keys control the sprite instead of it moving on its own.
