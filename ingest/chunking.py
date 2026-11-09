@@ -87,17 +87,21 @@ def _is_plain_heading(lines: list[str],i:int) -> bool:
     return True
     
 # =========== Split a page into sections ======== 
-def _split_sections(text:str) -> list[tuple[str,str]]:
+def _split_sections(text:str,page_title:str = "") -> list[tuple[str,str]]:
     """Cut a page at its headings.
 
     Returns a list of (heading_path, body), e.g.
     ("Using signals > Connecting a signal in code", "You can also connect ...").
     Text before the first heading gets heading_path "".
     """
-    page_title, text = _strip_header(text)
+    header_title, text = _strip_header(text)
+    page_title = page_title or header_title
     lines = text.splitlines()
     sections:list[tuple[str,str]] = []
-    path: list[str] = [page_title] if page_title else []
+    root: list[str] = [page_title] if page_title else []   # page title, start of every path
+    path: list[str] = list(root)
+    seen_text = False                                      # any body text yet?
+
     underline_levels: list[str] = []
     body: list[str] = []
 
@@ -123,11 +127,19 @@ def _split_sections(text:str) -> list[tuple[str,str]]:
         if _is_plain_heading(lines, i):
             flush()
             title = _clean_heading(lines[i])
-            # First heading = page title (level 0); every later one is level 1
-            path = [title] if not path else path[:1] + [title]
+            if not root and not seen_text:
+                root = [title]          # page starts with a heading: it's the page title
+                path = list(root)
+            elif root and title == root[-1]:
+                path = list(root)       # page title repeated in the text: don't nest it
+            else:
+                path = root + [title]   # every other heading sits under the page title
             i += 1
             continue
+        if lines[i].strip():
+            seen_text = True
         body.append(lines[i])
+
         i += 1
     flush()
     return sections
@@ -137,14 +149,16 @@ MIN_BODY_ROOM = 200
 def _semantic_pieces(
     text: str,
     chunk_size:int = CHUNK_SIZE,
-    chunk_overlap: int = CHUNK_OVERLAP,    
+    chunk_overlap: int = CHUNK_OVERLAP,
+    page_title: str = "",
+
 ) -> list[tuple[str,str]]:
     """Return (heading_path, chunk_text) for every chunk on the page.
 
     chunk_text already starts with the heading path.
     """
     pieces: list[tuple[str,str]] = []
-    for heading, body in _split_sections(text):
+    for heading, body in _split_sections(text,page_title):
         prefix = f"{heading}\n\n" if heading else ""
         room = max(chunk_size - len(prefix),MIN_BODY_ROOM)
 
@@ -160,12 +174,12 @@ def _semantic_pieces(
             pieces.append((heading,prefix + part))
     return pieces
 
-def semantic_chunker(text:str) -> list[str]:
+def semantic_chunker(text:str,page_title:str="") -> list[str]:
     """Split by headings first, then by length inside long sections.
 
     Same signature as length_chunker in ingest/ingest.py: text -> list of chunk strings.
     """
-    return [chunk for _, chunk in _semantic_pieces(text)]
+    return [chunk for _, chunk in _semantic_pieces(text,page_title=page_title)]
              
             
          
@@ -202,7 +216,7 @@ def chunk_page_semantic(
             metadata = {**metadata,"heading":heading,"chunk_index":i},
         )
         for i, (heading, chunk_text) in enumerate(
-             _semantic_pieces(text, chunk_size, chunk_overlap)
+             _semantic_pieces(text, chunk_size, chunk_overlap, metadata.get("title",""))
         )
     ]
 
