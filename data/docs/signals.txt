@@ -1,0 +1,19 @@
+Using signals
+
+Signals are Godot's way of letting one node announce that something happened, so that other nodes can react without the two being tightly linked. A button emits a signal when it is pressed, a timer emits one when it runs out, and an area emits one when a body enters it.
+
+Connecting a signal in the editor
+
+Select the node that emits the signal, open the Node dock next to the Inspector, and pick the signal from the list. Double-click it and choose the node whose script should receive it. Godot creates a callback function in that script, for example _on_button_pressed, which runs every time the signal is emitted.
+
+Connecting a signal in code
+
+You can also connect signals from a script, which is useful for nodes created at runtime. Call connect on the signal and pass the function to run, for example button.pressed.connect(_on_button_pressed). To stop listening, call disconnect with the same function.
+
+Defining custom signals
+
+Scripts can declare their own signals with the signal keyword at the top of the file, such as signal health_depleted. Emit it with health_depleted.emit() when the event happens. Signals can carry arguments, so a health_changed signal might send the old and new values to whoever is listening.
+
+Why use signals
+
+Signals keep scenes independent. A player scene does not need to know that a health bar exists; it only emits health_changed, and the user interface decides how to respond. This makes scenes easier to reuse and test.
