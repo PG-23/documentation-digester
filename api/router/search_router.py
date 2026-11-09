@@ -12,17 +12,18 @@ def search(
     k: int = Query(default=3, ge=1, le=20),
     vector_store: Chroma = Depends(get_vector_store)
 ):
-    retriever = vector_store.as_retriever(
-        search_kwargs={"k": k}
-    )
 
-    documents = retriever.invoke(query)
+    docs = vector_store.similarity_search_with_relevance_scores(query, k)
     
     return {
         "query": query,
         "results": [{
-                "content": doc.page_content,
-                "metadata": doc.metadata
-            } for doc in documents
+                "text": doc.page_content,
+                "score": score,
+                "title": doc.metadata.get("title", ""),
+                "url": doc.metadata.get("url", ""),
+                "source_file": doc.metadata.get("source_file", ""),
+                "chunk_index": doc.metadata.get("chunk_index", "")
+            } for doc, score in docs
         ]
     }
