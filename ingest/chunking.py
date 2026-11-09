@@ -169,8 +169,6 @@ def semantic_chunker(text:str) -> list[str]:
              
             
          
-       
-
           
 def chunk_page(
         text:str,
