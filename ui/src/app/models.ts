@@ -1,7 +1,7 @@
 // one search hit = one chunk of a doc page that matched the query
 export interface SearchResult {
     text: string;       // actual text content
-    score: number;      // how well matched it is
+    score?: number;      // how well matched it is (optional since api doesnt send it yet)
     title: string;
     section?: string;   //doc section, ? = optional
     url: string;
@@ -28,4 +28,13 @@ export interface IngestResponse {
     source_file: string;
     chunks_added: number;
     took_ms?: number;      // this is optional but how long the ingestion took
+}
+
+// shape the real /search endpoint returns right now (dennis api)
+export interface ApiSearchResponse {
+    query: string;
+    results: {
+        content: string;    // chunk text
+        metadata: Record<string, any>;      // title, section, url, source_file, chunk_index & chunker
+    }[];
 }
