@@ -1,17 +1,52 @@
 {
-  "signals.txt": {
-    "title": "Using signals",
-    "section": "Getting Started",
-    "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/signals.html"
+  "first_2d_game_project_setup.txt": {
+    "title": "Setting Up the Project",
+    "section": "Your first 2D game",
+    "url": "https://docs.godotengine.org/en/stable/getting_started/first_2d_game/01.project_setup.html"
   },
-  "nodes_and_scenes.txt": {
-    "title": "Nodes and Scenes",
-    "section": "Getting Started",
-    "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/nodes_and_scenes.html"
+  "first_3d_game_setup.txt": {
+    "title": "Setting Up the Game Area",
+    "section": "Your first 3D game",
+    "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html"
   },
   "first_script.txt": {
-    "title": "Creating your first script",
-    "section": "Getting Started",
-    "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/scripting_first_script.html"
+    "title": "",
+    "section": "",
+    "url": ""
+  },
+  "introduction_to_godot.txt": {
+    "title": "Introduction to Godot",
+    "section": "Getting started / Introduction",
+    "url": "https://docs.godotengine.org/en/stable/getting_started/introduction/introduction_to_godot.html"
+  },
+  "key_concepts_overview.txt": {
+    "title": "Overview of Godot's Key Concepts",
+    "section": "Getting started / Introduction",
+    "url": "https://docs.godotengine.org/en/stable/getting_started/introduction/key_concepts_overview.html"
+  },
+  "nodes_and_scenes.txt": {
+    "title": "",
+    "section": "",
+    "url": ""
+  },
+  "scripting_languages.txt": {
+    "title": "Scripting Languages",
+    "section": "Getting started / Step by step",
+    "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/scripting_languages.html"
+  },
+  "signals.txt": {
+    "title": "",
+    "section": "",
+    "url": ""
+  },
+  "your_first_2d_game.txt": {
+    "title": "Your First 2D Game",
+    "section": "Your first 2D game",
+    "url": "https://docs.godotengine.org/en/stable/getting_started/first_2d_game/index.html"
+  },
+  "your_first_3d_game.txt": {
+    "title": "Your First 3D Game",
+    "section": "Your first 3D game",
+    "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/index.html"
   }
 }

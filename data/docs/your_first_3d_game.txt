@@ -1,0 +1,142 @@
+TITLE: Your First 3D Game
+
+SOURCE: https://docs.godotengine.org/en/stable/getting_started/first_3d_game/index.html
+
+CATEGORY: Your first 3D game
+
+CONTENT:
+
+Godot's first 3D game tutorial teaches developers how to build a complete three-dimensional game called "Squash the Creeps."
+
+In this game, the player controls a character who jumps around an environment and attempts to squash approaching enemies. The tutorial introduces important 3D game development concepts, including three-dimensional coordinates, character movement, physics, collision detection, enemy spawning, animations, and user interface development.
+
+The goal is to help developers understand how the different systems of a 3D game work together to create an interactive experience.
+
+**Game Overview:**
+
+"Squash the Creeps" is a small 3D game where enemies approach the player's character.
+
+The player must jump on enemies to defeat them while avoiding situations that cause the character to lose.
+
+The tutorial builds the game step by step, beginning with the environment and player character before adding enemies, gameplay mechanics, and the interface.
+
+Some of the major systems include:
+- A three-dimensional game environment.
+- Player movement and jumping.
+- Physics-based character behavior.
+- Collision detection between game objects.
+- Enemy creation and spawning.
+- Character animations.
+- Score tracking and game-over behavior.
+
+**What the Tutorial Teaches:**
+
+The tutorial covers several stages of development:
+
+1. Setting up the 3D game area.
+2. Creating the player scene and configuring input actions.
+3. Writing code to move the player.
+4. Designing the enemy scene.
+5. Spawning enemies during gameplay.
+6. Implementing jumping and squashing mechanics.
+7. Handling situations where the player is defeated.
+8. Adding a score system and replay functionality.
+9. Creating character animations.
+10. Exploring additional improvements to the finished game.
+
+Each stage builds on the previous one, allowing developers to understand how individual features contribute to the complete project.
+
+**Three-Dimensional Coordinates:**
+
+Unlike a 2D game, which primarily uses horizontal and vertical coordinates, a 3D game uses three axes: X, Y, and Z.
+
+These coordinates describe an object's position and movement in three-dimensional space.
+
+Developers must understand how these axes relate to the game environment when positioning characters, objects, cameras, and other scene elements.
+
+The tutorial introduces these concepts while building the player character and game environment.
+
+**Player Movement and Jumping:**
+
+The player character needs to move through the 3D environment and jump to interact with enemies.
+
+The tutorial uses Godot's character movement tools and scripting to control the character.
+
+Input actions allow the game to respond to player controls. Scripts translate those inputs into movement, while physics helps determine how the character interacts with the environment.
+
+Jumping is an important gameplay mechanic because the player uses it to squash enemies.
+
+**Physics and Collision Detection:**
+
+Physics allows objects to interact in a predictable way.
+
+The tutorial introduces physics-based character movement and collision detection to determine when objects come into contact.
+
+Collision shapes help Godot identify interactions between the player, enemies, and environment.
+
+Physics layers and collision-related settings help control which objects can interact with one another.
+
+These systems are important because the game needs to distinguish between ordinary movement and meaningful gameplay events, such as jumping onto an enemy or being hit by one.
+
+**Enemy Design and Spawning:**
+
+Enemies are created as their own reusable scene.
+
+This allows the game to create multiple enemy instances during gameplay without manually building each one.
+
+The tutorial demonstrates how to spawn monsters at intervals and control their movement through the environment.
+
+Procedural spawning introduces variation into gameplay because enemies can appear at different times and positions.
+
+The tutorial also explores adjusting movement speed and using animations to make enemies appear more active.
+
+**Scoring and Game Interface:**
+
+The game includes a score system that tracks the player's progress.
+
+The interface displays relevant information and provides feedback as the game progresses.
+
+The tutorial demonstrates how to handle the player's defeat and create a replay option so the user can start another attempt.
+
+These features connect the gameplay mechanics to the user interface and make the project feel like a complete game.
+
+**Character Animation:**
+
+Animations help communicate character movement and actions.
+
+The tutorial introduces animation as part of the development process, showing how visual movement can make characters feel more responsive and natural.
+
+Animations can be coordinated with gameplay behavior so that the character's appearance reflects what is happening in the game.
+
+**Programming Languages and Resources:**
+
+The tutorial provides examples using GDScript and C#.
+
+Developers can follow the version that matches their preferred programming language.
+
+Godot also provides starter assets and a completed demo project. These resources help developers follow the instructions and compare their implementation with the finished game.
+
+**How 3D Development Builds on 2D Concepts:**
+
+Many concepts used in 2D development also apply to 3D games, including:
+- Nodes and scenes.
+- Scripts and input actions.
+- Collision detection.
+- Timers and signals.
+- Reusable game components.
+- User interface elements.
+
+However, 3D development introduces additional considerations, such as three-dimensional coordinates, depth, 3D physics, cameras, and lighting.
+
+Godot recommends that beginners learn 2D development first because it provides a simpler introduction to the engine. Developers can still follow the 3D tutorial independently if they already understand basic programming concepts.
+
+**Key Takeaways:**
+- "Squash the Creeps" is a beginner-friendly 3D game project.
+- Three-dimensional games use X, Y, and Z coordinates.
+- Player movement and jumping are controlled through scripts and input actions.
+- Physics and collision detection determine how objects interact.
+- Reusable enemy scenes allow multiple enemies to be created.
+- Timed spawning introduces variation into gameplay.
+- Animations make character movement more natural.
+- Score tracking and replay functionality help complete the gameplay experience.
+- Godot supports both GDScript and C# for following the tutorial.

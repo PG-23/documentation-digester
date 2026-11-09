@@ -1,0 +1,85 @@
+TITLE: Introduction to Godot
+
+SOURCE: https://docs.godotengine.org/en/stable/getting_started/introduction/introduction_to_godot.html
+
+CATEGORY: Getting started / Introduction
+
+CONTENT:
+
+Godot is a free and open-source, general-purpose game engine used to create both 2D and 3D games and applications. It provides developers with tools to build projects and export them to platforms such as desktop computers, mobile devices, and the web.
+
+Godot is designed to support different types of developers, from beginners learning game development to experienced programmers building more advanced projects.
+
+**What Is a Game Engine?**
+
+A game engine is a software development environment that provides reusable tools and systems for creating games. Instead of building every feature from scratch, developers can use an engine's existing functionality.
+
+Godot provides systems for:
+- Rendering graphics and displaying game objects.
+- Handling physics and detecting collisions.
+- Playing audio and managing sound effects.
+- Processing player input from keyboards, controllers, and other devices.
+- Running animations and controlling objects.
+- Organizing game components into scenes and nodes.
+
+These systems work together to provide the foundation for building interactive applications.
+
+**Godot's History and Development:**
+
+Godot originally began as an internal game development engine created by an Argentinian game studio. Development started in 2001, and the engine was released as open-source software in 2014.
+
+Because it is open source, developers can access its source code, contribute improvements, and use it without paying licensing fees.
+
+Examples of projects made with Godot include Cassette Beasts, Usagi Shima, Pixelorama, and RPG in a Box.
+
+**The Godot Editor:**
+
+Godot includes an integrated editor that brings many development tools into one environment. Developers can create scenes, write scripts, manage assets, test gameplay, and debug problems without constantly switching applications.
+
+Important editor tools include:
+
+- Script Editor: Used to write and manage game code.
+- Animation Editor: Used to create and modify animations.
+- TileMap Editor: Helps build 2D environments using reusable tiles.
+- Shader Editor: Used to create visual effects and customize how objects are rendered.
+- Debugger: Helps identify and investigate errors during development.
+- Profiler: Helps examine application performance and identify areas that may need optimization.
+
+Godot also supports external development tools. For example, developers can import 3D scenes from Blender and use integrations with code editors such as Visual Studio Code.
+
+**Programming Languages:**
+
+Godot provides several ways to add custom behavior to a game.
+
+Its two primary scripting languages are:
+
+- GDScript: A language designed specifically for Godot. Its syntax is relatively simple, and it integrates closely with the engine's editor and features.
+- C#: A widely used programming language that is particularly useful for developers familiar with the .NET ecosystem.
+
+Godot also supports lower-level development through GDExtension, which allows developers to integrate C++ code and other native libraries without recompiling the engine.
+
+**Programming Knowledge:**
+
+Developers can begin learning Godot without being experts in programming. However, understanding basic programming concepts makes development easier.
+
+Useful concepts include:
+- Variables for storing information.
+- Functions for organizing reusable instructions.
+- Conditional statements for making decisions.
+- Loops for repeating operations.
+- Classes and objects for organizing code.
+- Object-oriented programming for structuring more complex applications.
+
+Godot uses object-oriented programming concepts throughout its engine. Understanding how objects interact with one another helps developers work with nodes, scenes, and scripts.
+
+**Choosing Godot for a Project:**
+
+Godot can be used for small independent games, larger game projects, and interactive applications. Its built-in editor and open-source nature make it accessible to developers who want to learn without purchasing a commercial game engine license.
+
+**Key Takeaways:**
+- Godot is a free, open-source engine for creating 2D and 3D games.
+- A game engine provides reusable systems for graphics, physics, audio, input, and animation.
+- The Godot editor includes tools for coding, animation, shaders, debugging, and performance analysis.
+- GDScript and C# are its primary scripting languages.
+- GDExtension allows developers to integrate C++ and other native functionality.
+- Programming fundamentals and object-oriented programming knowledge help developers use Godot effectively.
