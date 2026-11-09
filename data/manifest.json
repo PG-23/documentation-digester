@@ -1,1 +1,22 @@
-{}
+{
+    "documents": [
+        {
+            "title": "First Steps",
+            "source": "https://fastapi.tiangolo.com/tutorial/first-steps/",
+            "category": "Fundamentals",
+            "file": "data/docs/first_steps.txt"
+        },
+        {
+            "title": "Path Parameters",
+            "source": "https://fastapi.tiangolo.com/tutorial/path-params/",
+            "category": "Fundamentals",
+            "file": "data/docs/path_parameters.txt"
+        },
+        {
+            "title": "Query Parameters",
+            "source": "https://fastapi.tiangolo.com/tutorial/query-params/",
+            "category": "Fundamentals",
+            "file": "data/docs/query_parameters.txt"
+        }
+    ]
+}

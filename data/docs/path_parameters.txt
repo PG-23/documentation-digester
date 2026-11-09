@@ -1,0 +1,132 @@
+TITLE: Path Parameters
+
+SOURCE: https://fastapi.tiangolo.com/tutorial/path-params/
+
+CATEGORY: Fundamentals
+
+CONTENT:
+
+OVERVIEW:
+Path parameters are variables included directly in a URL. FastAPI uses these values to identify specific resources or pass information to an endpoint.
+
+For example, in the URL /items/5, the value 5 can represent an item ID.
+
+DECLARING PATH PARAMETERS:
+Path parameters are declared using curly braces in the URL path. The parameter name inside the braces must match the function argument.
+
+EXAMPLE CODE:
+
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/items/{item_id}")
+async def read_item(item_id):
+    return {"item_id": item_id}
+
+In this example:
+- /items/{item_id} defines a URL with a variable.
+- item_id is passed into the read_item function.
+- Visiting /items/5 returns {"item_id": "5"}.
+
+PATH PARAMETERS WITH TYPES:
+Python type annotations can be used to define the expected data type of a path parameter.
+
+EXAMPLE CODE:
+
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/items/{item_id}")
+async def read_item(item_id: int):
+    return {"item_id": item_id}
+
+In this example, item_id must be an integer. FastAPI automatically converts and validates the incoming value.
+
+If an invalid value is provided, such as text instead of an integer, FastAPI returns a validation error.
+
+SUPPORTED TYPES:
+Path parameters can use standard Python types such as:
+- str: Text values.
+- int: Whole numbers.
+- float: Decimal numbers.
+- bool: Boolean values.
+
+AUTOMATIC VALIDATION AND DOCUMENTATION:
+FastAPI uses Python type annotations and Pydantic to validate incoming data. These declarations also help generate interactive API documentation.
+
+The /docs page displays path parameters and their expected data types.
+
+ORDER OF PATH OPERATIONS:
+FastAPI evaluates path operations in the order they are declared.
+
+When using a fixed route and a route with a variable, declare the fixed route first.
+
+EXAMPLE CODE:
+
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/users/me")
+async def read_user_me():
+    return {"user_id": "current user"}
+
+@app.get("/users/{user_id}")
+async def read_user(user_id: str):
+    return {"user_id": user_id}
+
+The /users/me route must come before /users/{user_id}. Otherwise, FastAPI could interpret "me" as the user_id parameter.
+
+PREDEFINED PATH PARAMETER VALUES:
+Python Enum classes can restrict a path parameter to a predefined set of values.
+
+An Enum is a collection of named constant values.
+
+EXAMPLE CODE:
+
+from enum import Enum
+from fastapi import FastAPI
+
+class ModelName(str, Enum):
+    alexnet = "alexnet"
+    resnet = "resnet"
+    lenet = "lenet"
+
+app = FastAPI()
+
+@app.get("/models/{model_name}")
+async def get_model(model_name: ModelName):
+    return {"model_name": model_name}
+
+In this example, model_name must match one of the predefined values: alexnet, resnet, or lenet.
+
+PATH PARAMETERS CONTAINING PATHS:
+FastAPI supports path parameters that can contain an entire file path by using the :path converter.
+
+Example URL pattern:
+
+/files/{file_path:path}
+
+EXAMPLE CODE:
+
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/files/{file_path:path}")
+async def read_file(file_path: str):
+    return {"file_path": file_path}
+
+The :path converter allows the parameter to include additional slashes and nested directories.
+
+KEY TAKEAWAYS:
+- Path parameters are variables included directly in a URL.
+- Curly braces define path parameters in route declarations.
+- Function arguments receive the values from the URL.
+- Python type annotations allow FastAPI to validate parameter values.
+- Invalid values produce automatic validation errors.
+- Route declaration order matters when fixed and variable paths overlap.
+- Enum classes restrict parameters to predefined values.
+- The :path converter allows a parameter to contain a full path.

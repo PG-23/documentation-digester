@@ -1,0 +1,161 @@
+TITLE: Query Parameters
+
+SOURCE: https://fastapi.tiangolo.com/tutorial/query-params/
+
+CATEGORY: Fundamentals
+
+CONTENT:
+
+OVERVIEW:
+Query parameters are additional values passed to an API through the URL. They are commonly used to filter, search, sort, or control the amount of data returned by an endpoint.
+
+Query parameters appear after a question mark (?) in a URL. Multiple parameters are separated by an ampersand (&).
+
+Example URL:
+http://127.0.0.1:8000/items/?skip=0&limit=10
+
+In this example:
+- skip is a query parameter with a value of 0.
+- limit is a query parameter with a value of 10.
+
+DECLARING QUERY PARAMETERS:
+FastAPI automatically interprets function parameters that are not declared as path parameters as query parameters.
+
+EXAMPLE CODE:
+
+from fastapi import FastAPI
+
+app = FastAPI()
+
+fake_items_db = [
+    {"item_name": "Foo"},
+    {"item_name": "Bar"},
+    {"item_name": "Baz"}
+]
+
+@app.get("/items/")
+async def read_item(skip: int = 0, limit: int = 10):
+    return fake_items_db[skip : skip + limit]
+
+In this example:
+- skip determines how many items to skip.
+- limit determines the maximum number of items to return.
+- Both parameters have default values.
+
+DEFAULT VALUES:
+Query parameters can have default values. If the user does not provide a value in the URL, FastAPI uses the default.
+
+For example:
+- /items/ uses skip=0 and limit=10.
+- /items/?skip=20 uses skip=20 and limit=10.
+
+OPTIONAL QUERY PARAMETERS:
+A query parameter can be made optional by assigning it a default value of None.
+
+EXAMPLE CODE:
+
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/items/{item_id}")
+async def read_item(item_id: str, q: str | None = None):
+    if q:
+        return {"item_id": item_id, "q": q}
+    return {"item_id": item_id}
+
+In this example:
+- item_id is a required path parameter.
+- q is an optional query parameter.
+- If q is not provided, its value is None.
+
+QUERY PARAMETER TYPE CONVERSION:
+FastAPI uses Python type annotations to convert and validate query parameter values.
+
+Common types include:
+- str: Text.
+- int: Whole numbers.
+- float: Decimal numbers.
+- bool: True or false values.
+
+Boolean values can be provided using values such as true, false, 1, 0, yes, and no. FastAPI converts recognized values into Boolean values.
+
+EXAMPLE CODE:
+
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/items/{item_id}")
+async def read_item(
+    item_id: str,
+    q: str | None = None,
+    short: bool = False
+):
+    item = {"item_id": item_id}
+
+    if q:
+        item.update({"q": q})
+
+    if not short:
+        item.update({
+            "description": "This is an amazing item with a long description"
+        })
+
+    return item
+
+In this example:
+- q is an optional text parameter.
+- short is a Boolean parameter.
+- If short is true, the long description is not included.
+- If short is false or omitted, the description is included.
+
+MULTIPLE PATH AND QUERY PARAMETERS:
+FastAPI can recognize multiple path parameters and query parameters in the same endpoint. It identifies them based on their names and how they are declared in the URL.
+
+REQUIRED QUERY PARAMETERS:
+A query parameter becomes required when it does not have a default value.
+
+For example:
+
+@app.get("/items/")
+async def read_items(needy: str):
+    return {"needy": needy}
+
+In this example, needy is required. A request must include it in the URL.
+
+Example:
+http://127.0.0.1:8000/items/?needy=example
+
+If the required parameter is missing, FastAPI returns a validation error.
+
+REQUIRED, OPTIONAL, AND DEFAULT PARAMETERS:
+An endpoint can contain different types of query parameters at the same time.
+
+Example:
+
+@app.get("/items/")
+async def read_items(
+    needy: str,
+    skip: int = 0,
+    limit: int | None = None
+):
+    return {
+        "needy": needy,
+        "skip": skip,
+        "limit": limit
+    }
+
+In this example:
+- needy is required.
+- skip is optional and defaults to 0.
+- limit is optional and defaults to None.
+
+KEY TAKEAWAYS:
+- Query parameters provide additional information through a URL.
+- Query parameters appear after ? and are separated by &.
+- FastAPI automatically identifies query parameters based on function arguments.
+- Python type annotations control data conversion and validation.
+- Default values make query parameters optional.
+- A parameter without a default value is required.
+- Multiple path and query parameters can be used in the same endpoint.
