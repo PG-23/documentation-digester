@@ -1,1 +1,45 @@
-[]
+[
+  {
+    "id": "q01",
+    "question": "How do different parts of a game notify each other when something happens?",
+    "expected_source_file": "key_concepts_overview.txt",
+    "expected_heading": "4. Signals",
+    "style": "paraphrase"
+  },
+  {
+    "id": "q02",
+    "question": "What is a scene in Godot?",
+    "expected_source_file": "key_concepts_overview.txt",
+    "expected_heading": "2. Scenes",
+    "style": "keyword"
+  },
+  {
+    "id": "q03",
+    "question": "Can I write performance-critical code in C++?",
+    "expected_source_file": "scripting_languages.txt",
+    "expected_heading": "C and C++ Through GDExtension",
+    "style": "paraphrase"
+  },
+  {
+    "id": "q04",
+    "question": "How do I make the floor solid so the player can stand on it in 3D?",
+    "expected_source_file": "first_3d_game_setup.txt",
+    "expected_heading": "Creating the Ground with StaticBody3D",
+    "style": "paraphrase"
+  },
+  {
+    "id": "q05",
+    "question": "Why do the tutorials start with a 2D game before 3D?",
+    "expected_source_file": "your_first_2d_game.txt",
+    "expected_heading": "Why Start with 2D?",
+    "style": "paraphrase"
+  },
+  {
+    "id": "q06",
+    "question": "How do I set the size of the game window?",
+    "expected_source_file": "first_2d_game_project_setup.txt",
+    "expected_heading": "Configuring the Game Window",
+    "style": "keyword"
+  }
+]
+
