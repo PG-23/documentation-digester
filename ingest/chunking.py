@@ -18,7 +18,7 @@ UNDERLINE_RE = re.compile(r'^([=\-~*^"+#`])\1{2,}\s*$')
 
 NOT_HEADING_ENDING = (".",",",";",":","!")
 CODE_CHARS = set("(){}=;<>[]")
-BULLETS = ("_ ","* ",". ")
+BULLETS = ("- ", "* ", "• ")
 
 def _is_blank(lines: list[str],i:int) -> bool:
     """True if index i is outside the list or the line is empty."""
