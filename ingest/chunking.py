@@ -8,6 +8,7 @@ CHUNK_OVERLAP = 100
 MAX_HEADING_LEN = 80 # heading are short lines
 MAX_HEADING_WORDS = 10
 
+# =========== Heading detector========
 # Style 1 (Sphinx/RST): title line followed by one character repeated, e.g. "=====".
 # "No spaces" means table borders like "=====  =====" are not matched.
 
@@ -58,8 +59,54 @@ def _is_plain_heading(lines: list[str],i:int) -> bool:
           return False
     return True
     
-    
-      
+# =========== Split a page into sections ======== 
+def _split_sections(text:str) -> list[tuple[str,str]]:
+    """Cut a page at its headings.
+
+    Returns a list of (heading_path, body), e.g.
+    ("Using signals > Connecting a signal in code", "You can also connect ...").
+    Text before the first heading gets heading_path "".
+    """
+    lines = text.splitlines()
+    sections:list[tuple[str,str]] = []
+    path: list[str] = []
+    underline_levels: list[str] = []
+    body: list[str] = []
+
+    def flush():
+        """Save the body collected so far under the current path."""
+        content = "\n".join(body).strip()
+        if content:
+            sections.append((" > ".join(path),content))
+        body.clear()
+
+    i = 0
+    while i < len(lines):
+        if _is_underline_heading(lines, i):
+            flush()
+            title = lines[i].strip()
+            char = lines[i+1].strip()[0]
+            if char not in underline_levels:
+                underline_levels.append(char)
+            level = underline_levels.index(char)
+            path = path[:level] + [title]
+            i += 2
+            continue
+        if _is_plain_heading(lines, i):
+            flush()
+            title = lines[i].strip()
+            # First heading = page title (level 0); every later one is level 1
+            path = [title] if not path else path[:1] + [title]
+            i += 1
+            continue
+        body.append(lines[i])
+        i += 1
+    flush()
+    return sections
+         
+            
+
+          
 def chunk_page(
         text:str,
         metadata: dict,
