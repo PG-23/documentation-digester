@@ -1,22 +1,46 @@
 {
     "documents": [
         {
-            "title": "First Steps",
-            "source": "https://fastapi.tiangolo.com/tutorial/first-steps/",
-            "category": "Fundamentals",
-            "file": "data/docs/first_steps.txt"
+            "title": "Setting Up the Project",
+            "source": "https://docs.godotengine.org/en/stable/getting_started/first_2d_game/01.project_setup.html",
+            "category": "Your first 2D game",
+            "file": "data/docs/first_2d_game_project_setup.txt"
         },
         {
-            "title": "Path Parameters",
-            "source": "https://fastapi.tiangolo.com/tutorial/path-params/",
-            "category": "Fundamentals",
-            "file": "data/docs/path_parameters.txt"
+            "title": "Setting Up the Game Area",
+            "source": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html",
+            "category": "Your first 3D game",
+            "file": "data/docs/first_3d_game_setup.txt"
         },
         {
-            "title": "Query Parameters",
-            "source": "https://fastapi.tiangolo.com/tutorial/query-params/",
-            "category": "Fundamentals",
-            "file": "data/docs/query_parameters.txt"
+            "title": "Introduction to Godot",
+            "source": "https://docs.godotengine.org/en/stable/getting_started/introduction/introduction_to_godot.html",
+            "category": "Getting started / Introduction",
+            "file": "data/docs/introduction_to_godot.txt"
+        },
+        {
+            "title": "Overview of Godot's Key Concepts",
+            "source": "https://docs.godotengine.org/en/stable/getting_started/introduction/key_concepts_overview.html",
+            "category": "Getting started / Introduction",
+            "file": "data/docs/key_concepts_overview.txt"
+        },
+        {
+            "title": "Scripting Languages",
+            "source": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/scripting_languages.html",
+            "category": "Getting started / Step by step",
+            "file": "data/docs/scripting_languages.txt"
+        },
+        {
+            "title": "Your First 2D Game",
+            "source": "https://docs.godotengine.org/en/stable/getting_started/first_2d_game/index.html",
+            "category": "Your first 2D game",
+            "file": "data/docs/your_first_2d_game.txt"
+        },
+        {
+            "title": "Your First 3D Game",
+            "source": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/index.html",
+            "category": "Your first 3D game",
+            "file": "data/docs/your_first_3d_game.txt"
         }
     ]
 }

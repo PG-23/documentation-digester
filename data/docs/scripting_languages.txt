@@ -1,0 +1,110 @@
+TITLE: Scripting Languages
+
+SOURCE: https://docs.godotengine.org/en/stable/getting_started/step_by_step/scripting_languages.html
+
+CATEGORY: Getting started / Step by step
+
+CONTENT:
+
+Godot uses scripts to add functionality and behavior to nodes. A script can extend a node's existing properties and functions or introduce entirely new behavior.
+
+For example, a script attached to a Camera2D node could make the camera shake when the player takes damage. A script attached to a player character could control movement, handle input, and manage health.
+
+Scripts allow developers to customize how game objects behave instead of relying only on the default functionality of built-in nodes.
+
+**Available Scripting Languages:**
+
+Godot officially supports four gameplay programming languages:
+- GDScript
+- C#
+- C
+- C++
+
+Each language provides different advantages depending on the developer's experience and project requirements.
+
+Developers can also combine multiple languages in the same project. For example, GDScript could handle general gameplay logic while C++ handles performance-intensive algorithms.
+
+**Choosing a Programming Language:**
+
+Godot recommends GDScript for beginners because it was specifically designed for the engine.
+
+C# is another option for developers who already understand the language or want to work within the .NET ecosystem.
+
+C++ is useful when developers need lower-level control, want to integrate existing native libraries, or need to implement performance-intensive functionality.
+
+Choosing a language depends on factors such as:
+- Previous programming experience.
+- Project performance requirements.
+- Available libraries and development tools.
+- Platform compatibility.
+- How closely the language integrates with Godot.
+
+**GDScript:**
+
+GDScript is an object-oriented and imperative programming language created specifically for Godot.
+
+Its syntax is designed to be easy to read and closely integrated with the engine. It uses indentation to organize code blocks, making it visually similar to Python. However, GDScript is a separate language with its own features and behavior.
+
+Important features include:
+
+- Simple Syntax: GDScript uses relatively short and readable code, making it accessible to beginners.
+- Editor Integration: The Godot editor provides features such as code completion for nodes, signals, and engine functionality.
+- Fast Compilation: GDScript is designed to load and compile quickly within Godot.
+- Built-in Mathematics: It provides vector and transform types that are useful for positioning, movement, and other game calculations.
+- Multithreading: Developers can use multiple threads for tasks that can run independently.
+- Memory Management: Reference counting handles memory management for most reference-counted objects.
+- Gradual Typing: Developers can use dynamic variables or add optional type hints to make code easier to understand and maintain.
+
+GDScript is especially useful for implementing player movement, game rules, user interface behavior, and interactions between game objects.
+
+**C# and .NET:**
+
+Godot officially supports Microsoft's C# programming language through its .NET-enabled editor.
+
+C# is a mature programming language with a large ecosystem of libraries and development tools. It can be a good choice for developers who already have experience with object-oriented programming or Microsoft technologies.
+
+Important considerations include:
+- Developers must use the .NET version of the Godot editor.
+- Godot 4 uses .NET 8.
+- C# provides access to many existing libraries.
+- It offers a balance between performance and development convenience.
+- C# uses garbage collection for memory management.
+- Godot 4 C# projects have platform export limitations, including the inability to export to the web platform.
+
+C# can be used for many of the same gameplay tasks as GDScript, including movement, game logic, and interactions with nodes.
+
+**C and C++ Through GDExtension:**
+
+GDExtension allows developers to integrate code written in languages such as C and C++ into Godot without recompiling the engine itself.
+
+This is useful when developers need functionality that goes beyond what their primary scripting language provides.
+
+Common use cases include:
+- Performance-intensive calculations.
+- Custom gameplay systems.
+- Integrating third-party libraries.
+- Connecting external software development tools.
+- Implementing specialized functionality in native code.
+
+For example, a developer could write most of a game's behavior in GDScript while using C++ for a complex algorithm that requires additional performance.
+
+**Using Multiple Languages Together:**
+
+Godot does not require every part of a project to use the same programming language.
+
+A project might use:
+- GDScript for player movement and gameplay rules.
+- C# for systems written by developers familiar with .NET.
+- C++ through GDExtension for specialized or performance-intensive features.
+
+This flexibility allows developers to select the most appropriate language for different parts of their project.
+
+**Key Takeaways:**
+- Scripts attach to nodes to extend their functionality and behavior.
+- Godot supports GDScript, C#, C, and C++ for gameplay development.
+- GDScript is recommended for beginners because of its simple syntax and close editor integration.
+- GDScript uses indentation and has similarities to Python, but it is a separate language.
+- C# provides access to the .NET ecosystem and existing libraries.
+- C and C++ can be integrated through GDExtension.
+- Developers can combine multiple programming languages in one Godot project.
+- Language selection depends on experience, performance requirements, and platform support.

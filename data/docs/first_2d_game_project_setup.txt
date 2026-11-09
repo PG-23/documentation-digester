@@ -1,0 +1,94 @@
+TITLE: Setting Up the Project
+
+SOURCE: https://docs.godotengine.org/en/stable/getting_started/first_2d_game/01.project_setup.html
+
+CATEGORY: Your first 2D game
+
+CONTENT:
+
+Before building the 2D game "Dodge the Creeps!", developers need to create a Godot project and configure its basic settings. This first stage establishes the project's folder structure, imports the required assets, and prepares the game window for development.
+
+A well-organized project makes it easier to locate resources, manage scenes, and maintain the game as it becomes more complex.
+
+**Creating a New Project:**
+
+Godot projects are created through the Project Manager.
+
+To start:
+1. Open the Godot Project Manager.
+2. Select the option to create a new project.
+3. Enter a project name.
+4. Choose a folder where the project files will be stored.
+5. Create and open the project.
+
+The project name helps identify it in the Project Manager, while the selected folder determines where Godot stores the project's files.
+
+Godot uses the `res://` path to refer to the root directory of the current project. This path is useful when scripts and scenes need to access project resources.
+
+**Importing Game Assets:**
+
+The tutorial provides starter assets that contain resources needed to build the game.
+
+These assets include visual resources such as character artwork, enemy artwork, backgrounds, and fonts.
+
+After downloading the provided assets, developers should extract them and copy the relevant folders into the project's root directory.
+
+The tutorial organizes resources into folders such as:
+- `art/`: Stores image and visual assets used by the game.
+- `fonts/`: Stores font files used for displaying text.
+
+Keeping assets organized makes them easier to locate and reuse.
+
+Godot automatically imports supported resources when they are added to the project. Imported files can then be accessed through the FileSystem panel in the editor.
+
+**Configuring the Game Window:**
+
+The tutorial uses a portrait-oriented game window with a base resolution of 480 pixels wide by 720 pixels high.
+
+To configure the window, open Project Settings and navigate to the Display and Window settings.
+
+Set the following values:
+- Width: 480 pixels.
+- Height: 720 pixels.
+- Stretch Mode: `canvas_items`.
+- Aspect: `keep`.
+
+The width and height determine the base dimensions of the game window.
+
+Stretch Mode controls how Godot scales the game's visual content when the window size changes. The `canvas_items` option scales canvas-based items, including sprites and other 2D elements.
+
+The `keep` aspect setting preserves the intended aspect ratio rather than stretching the game to fill a window with different proportions.
+
+These settings help maintain the intended appearance of the game across different window sizes.
+
+**Organizing Scenes and Scripts:**
+
+Godot uses scenes to organize different parts of a game. A scene can contain nodes, scripts, and other resources that work together to represent a game component.
+
+The tutorial introduces several scenes that will be created during development:
+- `Player`: Represents the character controlled by the player.
+- `Mob`: Represents the enemies that appear during gameplay.
+- `HUD`: Contains the user interface and score display.
+- `Main`: Coordinates the different game components.
+
+Each scene has a specific responsibility. Separating the player, enemies, interface, and main game logic helps keep the project organized.
+
+For a small project, scenes and scripts can initially be stored in the root directory using the `res://` path. Larger projects may benefit from separate folders for scenes, scripts, and other resources.
+
+**Why Project Setup Matters:**
+
+Project setup provides the foundation for the rest of development.
+
+Creating the project establishes its location, importing assets makes visual resources available, and configuring display settings determines how the game appears.
+
+Organizing scenes and resources also makes it easier to expand the project without putting every component into one large file.
+
+**Key Takeaways:**
+- The Godot Project Manager is used to create and open projects.
+- The `res://` path refers to the root directory of the current project.
+- Starter assets can be imported by copying their folders into the project.
+- Godot automatically imports supported resources.
+- The tutorial uses a 480-by-720 portrait-oriented game window.
+- `canvas_items` controls how 2D canvas elements scale.
+- `keep` preserves the game's aspect ratio.
+- Separate scenes help organize the Player, Mob, HUD, and Main components.

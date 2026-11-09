@@ -1,0 +1,176 @@
+TITLE: Setting Up the Game Area
+
+SOURCE: https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html
+
+CATEGORY: Your first 3D game
+
+CONTENT:
+
+The first stage of Godot's "Squash the Creeps" 3D game tutorial focuses on preparing the game environment. Before creating the player character or enemies, developers need to import the starter assets, create the main scene, build a physical floor, and add lighting.
+
+This setup establishes the foundation for the rest of the 3D game.
+
+**Importing the Starter Project:**
+
+The tutorial provides a starter project containing the 3D models, materials, and audio resources needed for development.
+
+To import it:
+
+1. Download the provided starter assets archive.
+2. Extract the ZIP file on the computer.
+3. Open the Godot Project Manager.
+4. Select the Import option.
+5. Browse to the extracted `3d_squash_the_creeps_starter/` folder.
+6. Locate the `project.godot` file inside the folder.
+7. Import and open the project.
+
+If Godot displays a message that the project was created with an older engine version, the tutorial instructs developers to convert it to the current version.
+
+The starter project includes:
+- An icon.
+- An `art/` folder containing visual resources.
+- A `fonts/` folder.
+- A `player.glb` 3D model.
+- A `mob.glb` 3D model.
+- Materials associated with the models.
+- A music track.
+
+Importing these resources provides the starting assets for building the game.
+
+**Creating the Main Scene:**
+
+The next step is to create the main scene that will eventually contain the game environment and coordinate its components.
+
+In the Scene dock:
+
+1. Add a new `Node`.
+2. Rename the node to `Main`.
+3. Save the scene as `main.tscn`.
+
+A scene's root node acts as the starting point for organizing its child nodes.
+
+The `Main` node will serve as the parent for major elements of the game area, including the ground and lighting.
+
+**Creating the Ground with StaticBody3D:**
+
+A 3D game needs a floor so that characters and other objects do not fall endlessly through the environment.
+
+Godot provides the `StaticBody3D` node for creating static physical objects such as floors, walls, and ceilings.
+
+The tutorial creates the ground by adding a `StaticBody3D` node as a child of `Main` and renaming it `Ground`.
+
+A `StaticBody3D` represents a physical object that does not move through normal physics simulation.
+
+However, the node needs a collision shape to define the physical area that other objects can interact with.
+
+**Understanding CollisionShape3D:**
+
+The tutorial adds a `CollisionShape3D` node as a child of `Ground`.
+
+A collision shape defines the physical boundaries of an object. It allows Godot's physics system to detect when another object touches or collides with it.
+
+The tutorial configures the collision shape as a `BoxShape3D`.
+
+To create it:
+
+1. Select the `CollisionShape3D` node.
+2. Open the Inspector.
+3. Find the Shape property.
+4. Create a new `BoxShape3D` resource.
+5. Expand the resource settings.
+6. Set its dimensions to 60 on the X-axis, 2 on the Y-axis, and 60 on the Z-axis.
+
+The large X and Z dimensions create a wide floor, while the Y dimension provides its thickness.
+
+A box shape is useful for floors and walls because its thickness helps prevent fast-moving objects from passing through.
+
+**Adding a Visible Floor with MeshInstance3D:**
+
+Collision shapes are invisible during normal gameplay. They define physical boundaries but do not provide the visual appearance of an object.
+
+To make the ground visible, the tutorial adds a `MeshInstance3D` node as another child of `Ground`.
+
+A `MeshInstance3D` displays a 3D mesh in the scene.
+
+The tutorial creates a `BoxMesh` resource through the Mesh property in the Inspector.
+
+Its dimensions are also configured to:
+- X: 60.
+- Y: 2.
+- Z: 60.
+
+The visual mesh and collision shape now represent the same physical floor.
+
+This distinction is important:
+- `CollisionShape3D` defines where physical interactions occur.
+- `MeshInstance3D` displays what the object looks like.
+
+Both are needed to create a floor that is visible and physically usable.
+
+**Positioning the Ground:**
+
+After creating the floor, the tutorial moves the `Ground` node downward by one meter.
+
+Godot's 3D editor provides grid snapping to help move objects in controlled increments.
+
+Grid snapping can be activated using the Use Snap button or the `Y` key. Developers can also hold `Ctrl` on Windows or `Cmd` on macOS while moving an object with the transform gizmo.
+
+The ground's vertical position is set to -1 on the Y-axis.
+
+Moving the parent `Ground` node also moves its child nodes, including the collision shape and visible mesh.
+
+This is an example of how parent-child relationships affect objects in a Godot scene tree.
+
+**Adding Directional Lighting:**
+
+A 3D scene needs lighting so that objects can be seen clearly.
+
+The tutorial adds a `DirectionalLight3D` node as a child of `Main`.
+
+A directional light provides illumination across the scene from a particular direction. It is useful for representing light sources such as sunlight.
+
+The tutorial positions the light above the ground and rotates it until the floor is illuminated.
+
+It also enables the Shadow setting in the Inspector.
+
+Shadows help provide depth and make objects appear more grounded in the 3D environment.
+
+**The Final Scene Structure:**
+
+After completing the setup, the scene contains the following hierarchy:
+
+Main
+- Ground
+  - CollisionShape3D
+  - MeshInstance3D
+- DirectionalLight3D
+
+Each node has a different responsibility:
+- `Main` organizes the game environment.
+- `Ground` represents the physical floor.
+- `CollisionShape3D` defines the floor's collision boundaries.
+- `MeshInstance3D` displays the visible floor.
+- `DirectionalLight3D` illuminates the environment and creates shadows.
+
+**Why This Setup Matters:**
+
+This stage introduces several important concepts used throughout 3D game development.
+
+Developers learn how to import an existing project, create and save scenes, organize nodes, configure collision resources, display 3D meshes, position objects, and add lighting.
+
+The distinction between visual objects and physical collision objects is especially important. A mesh determines how an object looks, while a collision shape determines how it interacts with other objects.
+
+The ground and lighting created here provide the environment needed for the next tutorial stage, where developers build the player scene and implement basic movement.
+
+**Key Takeaways:**
+- Godot's Project Manager imports existing projects through the `project.godot` file.
+- The tutorial's starter project includes 3D models, materials, fonts, and audio.
+- The `Main` node acts as the root of the game environment.
+- `StaticBody3D` creates static physical objects such as floors and walls.
+- `CollisionShape3D` defines the physical boundaries of an object.
+- `BoxShape3D` can be used to create rectangular collision areas.
+- `MeshInstance3D` displays visible 3D geometry.
+- `BoxMesh` creates a visible box-shaped mesh.
+- Moving a parent node also moves its children.
+- `DirectionalLight3D` illuminates the scene and can produce shadows.
+- The completed environment is the foundation for adding the player and gameplay mechanics.
