@@ -1,29 +1,13 @@
-from fastapi import FastAPI, Query, APIRouter, Request, Depends
-from langchain_chroma import Chroma
-from langchain_core.language_models import BaseChatModel
+from fastapi import APIRouter, Query
 
-router = APIRouter(prefix="/")
-
-def get_vector_store(request: Request) -> Chroma: 
-    # Add what the vector db store is
-    pass
-
-def get_llm_model(request: Request) -> BaseChatModel:
-    # I think model is needed here idk
-    pass
+router = APIRouter()
 
 @router.get("/search")
-def search(query: str, k: int, vector_store: Chroma = Depends(get_vector_store)):
-
-    retriever = get_vector_store();
-
-    documents = retriever.invoke(query)
-
-
+def search(
+    query: str,
+    k: int = Query(default=3, ge=1, le=20)
+):
     return {
         "query": query,
-        "results": [{
-            "content": doc.content,
-            "metadata": doc.metadata
-        } for doc in documents]
+        "results": []
     }
