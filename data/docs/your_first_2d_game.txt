@@ -1,0 +1,137 @@
+TITLE: Your First 2D Game
+
+SOURCE: https://docs.godotengine.org/en/stable/getting_started/first_2d_game/index.html
+
+CATEGORY: Your first 2D game
+
+CONTENT:
+
+Godot's first 2D game tutorial teaches developers how to create a complete game called "Dodge the Creeps!" In this game, the player controls a character and avoids enemies for as long as possible while earning points.
+
+The tutorial introduces the Godot editor, project organization, nodes, scenes, scripting, player movement, enemy behavior, collision detection, and user interface development.
+
+It is designed to help developers understand how individual game components work together to create a finished and playable project.
+
+**Game Overview:**
+
+In "Dodge the Creeps!", the player controls a character that moves around the screen while enemies appear and travel toward them.
+
+The main objective is to survive for as long as possible without colliding with an enemy. As time passes, the player's score increases.
+
+The game demonstrates how a relatively simple concept can be developed using several connected systems:
+- Player input and movement.
+- Enemy creation and movement.
+- Collision detection.
+- Timers and gameplay events.
+- Score tracking.
+- Game interface and restart functionality.
+
+**What the Tutorial Teaches:**
+
+Developers learn how to:
+
+1. Create and organize a Godot project.
+2. Build a player character using nodes and scenes.
+3. Write scripts to control player movement.
+4. Add animations to make characters move naturally.
+5. Configure collision shapes to detect interactions.
+6. Create enemies that move across the screen.
+7. Spawn enemies at random positions.
+8. Use timers to control enemy spawning and score updates.
+9. Connect different game components through a main scene.
+10. Display scores, messages, and buttons through a user interface.
+11. Add background music and sound effects.
+12. Implement game-over behavior and allow the player to restart.
+
+**Game Structure and Scenes:**
+
+The tutorial organizes the game into several independent scenes.
+
+**Player Scene:**
+
+The Player scene represents the character controlled by the user. It contains the nodes and scripts needed to display the character, process input, and control movement.
+
+It also uses collision detection to determine when the player interacts with enemies.
+
+**Mob Scene:**
+
+The Mob scene represents the enemies that move toward the player.
+
+Each enemy is created as a reusable scene. This allows the game to create multiple enemies without rebuilding their structure every time one appears.
+
+**HUD Scene:**
+
+HUD stands for Heads-Up Display. It represents the user interface that displays important game information.
+
+It includes elements such as:
+- The player's score.
+- Messages displayed during gameplay.
+- A start button.
+- Game-over information.
+
+The HUD helps players understand what is happening without interrupting the gameplay.
+
+**Main Scene:**
+
+The Main scene connects the Player, Mob, and HUD scenes. It manages the overall game and coordinates how the different components interact.
+
+For example, the Main scene can control when the game starts, when enemies appear, and when the game ends.
+
+Separating these components makes the project easier to develop, test, maintain, and expand.
+
+**Player Movement and Input:**
+
+Player movement is controlled through input actions. These actions allow the game to respond to keyboard controls and translate them into character movement.
+
+The movement system uses the player's input to determine the direction and speed of the character.
+
+Developers also learn how to use animation and collision detection so that the character behaves correctly while moving around the game world.
+
+**Enemy Behavior and Spawning:**
+
+Enemies are created using a reusable Mob scene.
+
+Instead of manually placing every enemy in the game, the tutorial demonstrates how to create enemies dynamically during gameplay.
+
+Timers help control when new enemies appear. Random positioning helps create different gameplay situations and prevents every enemy from appearing in the same location.
+
+**Scoring and User Interface:**
+
+The game uses a score system to reward players for surviving longer.
+
+Timers can update the score at regular intervals. The HUD displays the current score and provides messages when the game starts or ends.
+
+The restart functionality allows players to begin another round without manually reopening the project.
+
+**Why Start with 2D?**
+
+Godot recommends starting with 2D development before moving into 3D.
+
+Two-dimensional games provide a simpler environment for learning important engine concepts, including:
+- Nodes and scenes.
+- Basic scripting.
+- Character movement.
+- Collision detection.
+- Input handling.
+- Timers and signals.
+- User interface development.
+
+These concepts also apply to 3D development, although three-dimensional games introduce additional complexity.
+
+The tutorial assumes that learners have some programming experience. Beginners who have never programmed should first learn basic scripting concepts.
+
+**Programming Languages and Resources:**
+
+The tutorial provides examples using GDScript and C#. Developers can follow the language that best matches their experience.
+
+Godot also provides downloadable assets and completed demo projects. These resources allow developers to follow the tutorial and compare their results with a finished version.
+
+**Key Takeaways:**
+- "Dodge the Creeps!" is a complete beginner-friendly 2D game project.
+- Player movement is controlled through input actions and scripts.
+- Enemies can be created as reusable scenes and spawned dynamically.
+- Timers can control enemy spawning and score updates.
+- Collision detection determines when game objects interact.
+- The Player, Mob, HUD, and Main scenes separate the game's responsibilities.
+- The HUD displays scores, messages, and game controls.
+- The tutorial introduces important concepts that are useful for more advanced Godot projects.

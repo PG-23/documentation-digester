@@ -1,0 +1,5 @@
+{
+    "/search": { "target": "http://localhost:8000", "secure": false, "changeOrigin": true },
+    "/ingest": { "target": "http://localhost:8000", "secure": false, "changeOrigin": true },
+    "/health": { "target": "http://localhost:8000", "secure": false, "changeOrigin": true }
+}

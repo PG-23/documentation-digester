@@ -1,0 +1,103 @@
+TITLE: Overview of Godot's Key Concepts
+
+SOURCE: https://docs.godotengine.org/en/stable/getting_started/introduction/key_concepts_overview.html
+
+CATEGORY: Getting started / Introduction
+
+CONTENT:
+
+Godot uses four core concepts to organize and build games: nodes, scenes, the scene tree, and signals. These concepts work together to create reusable game components and allow different parts of a project to communicate.
+
+Understanding these concepts is important because almost every Godot project uses them, whether it is a small 2D game or a large 3D application.
+
+**1. Nodes:**
+
+Nodes are the basic building blocks of a Godot project. Each node provides a specific function or behavior, and developers can combine multiple nodes to create more complex objects.
+
+For example, a player character may need several different nodes:
+- CharacterBody2D: Provides functionality for a character that moves using physics.
+- Sprite2D: Displays the character's visual appearance.
+- CollisionShape2D: Defines the character's collision area.
+- Camera2D: Controls the camera view that follows the player.
+
+Each node has its own properties, functions, and responsibilities. Combining them allows developers to build objects without implementing every feature manually.
+
+Godot includes many built-in node types for 2D, 3D, and user interface development. Developers can also create custom behavior by attaching scripts to nodes or extending existing node types.
+
+**2. Scenes:**
+
+A scene is a collection of nodes organized together to represent a reusable part of a game.
+
+A scene can represent:
+- A player character.
+- An enemy or monster.
+- A weapon or item.
+- A user interface menu.
+- A building or environment.
+- An entire game level.
+
+Scenes can contain other scenes. For example, a level scene can include a player scene, multiple enemy scenes, and a user interface scene.
+
+This allows developers to create a component once and reuse it in different parts of a project. If the original scene is updated, its instances can reflect those changes.
+
+Scenes can also be saved independently and used as the starting point for developing different parts of a game.
+
+**3. The Scene Tree:**
+
+The scene tree is the hierarchical structure that organizes nodes and scenes in a running Godot project.
+
+Nodes are arranged through parent-child relationships. A parent node can contain multiple child nodes, creating an organized structure.
+
+For example, a player character might have the following structure:
+
+Player
+- Sprite2D
+- CollisionShape2D
+- Camera2D
+
+In this example, Player is the parent node, while Sprite2D, CollisionShape2D, and Camera2D are its children.
+
+The scene tree makes it easier to organize objects and understand how different parts of a game are connected.
+
+Parent-child relationships can also affect how nodes behave. For example, when a parent node moves, its children generally move along with it because their positions are relative to their parent.
+
+**4. Signals:**
+
+Signals are a communication system that allows nodes to notify other nodes when specific events occur.
+
+Instead of requiring one node to constantly check another node's state, it can connect to a signal and respond when that event happens.
+
+Examples include:
+- A button emitting a signal when a player clicks it.
+- A character detecting when it enters an area.
+- An enemy notifying the game when it has been defeated.
+- A player notifying the user interface when the score changes.
+
+Developers can connect signals to functions that execute when the corresponding event occurs.
+
+For example, a button's `pressed` signal can connect to a function that opens a menu or starts a game.
+
+Signals follow the observer design pattern. This approach helps keep different components independent because a node can notify other parts of the game without needing to manage all their internal behavior.
+
+**How the Four Concepts Work Together:**
+
+These concepts are designed to complement one another.
+
+Consider a simple game with a player and enemies:
+
+1. Nodes provide the individual components used to build the player and enemies.
+2. Scenes combine those nodes into reusable player and enemy objects.
+3. The scene tree organizes the player, enemies, and other game elements into a hierarchy.
+4. Signals allow these objects to communicate when events occur, such as collisions or button presses.
+
+Together, these systems make Godot projects easier to organize, maintain, and expand.
+
+**Key Takeaways:**
+- Nodes are the basic building blocks of a Godot project.
+- Scenes combine nodes into reusable game components.
+- Scenes can be nested inside other scenes.
+- The scene tree organizes nodes through parent-child relationships.
+- Parent-child relationships can affect how nodes move and behave.
+- Signals allow nodes to communicate when specific events occur.
+- Signals help reduce direct dependencies between game components.
+- Nodes, scenes, the scene tree, and signals form the foundation of Godot development.
