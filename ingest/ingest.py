@@ -2,22 +2,46 @@
 Ingestion pipeline: .txt files + manifest -> chunks -> embeddings -> ChromaDB.
 
 Run from the repo root:
-    python -m ingest.ingest                    # add/update every .txt in data/docs
-    python -m ingest.ingest --reset            # wipe the collection first, then ingest
-    python -m ingest.ingest --chunker semantic # use the semantic chunker in ingest/chunking.py
+    python -m ingest.ingest                     # add/update every .txt in data/docs
+    python -m ingest.ingest --reset             # wipe the collection first, then ingest
+    python -m ingest.ingest --file PATH.txt     # ingest one file (live upload demo)
+    python -m ingest.ingest --stats             # show what's in the collection; changes nothing
+    python -m ingest.ingest --chunker semantic  # use the semantic chunker in ingest/chunking.py
+
+Text files may start with a header (the data prep format):
+    TITLE: ...
+    SOURCE: <url>
+    CATEGORY: ...
+    CONTENT:
+    <page text>
+The header is removed before chunking. Metadata comes from manifest.json first,
+then from the header, then from defaults.
 
 Shared settings (the API must use the same DB_PATH, COLLECTION and MODEL_NAME):
     DB_PATH     = chroma_db/
     COLLECTION  = godot_docs
     MODEL_NAME  = sentence-transformers/all-MiniLM-L6-v2
+
+For the Search API's POST /ingest, call:
+    ingest_text(text, source_file, title=None, section=None, url=None)
 """
 
 from __future__ import annotations
 
 import argparse
 import json
+import os
 import time
+import warnings
 from pathlib import Path
+
+# Keep Hugging Face output quiet so demo output shows only our progress lines.
+# These must be set before sentence_transformers / transformers are imported.
+os.environ.setdefault("HF_HUB_DISABLE_SYMLINKS_WARNING", "1")
+os.environ.setdefault("HF_HUB_VERBOSITY", "error")
+os.environ.setdefault("TRANSFORMERS_VERBOSITY", "error")
+os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
+warnings.filterwarnings("ignore", module="huggingface_hub")
 
 # ---------------------------------------------------------------------------
 # Settings
@@ -32,39 +56,65 @@ MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 CHUNK_SIZE = 800      # characters
 CHUNK_OVERLAP = 100   # characters
 
+HEADER_FIELDS = {"TITLE": "title", "SOURCE": "url", "CATEGORY": "section"}
+
 
 # ---------------------------------------------------------------------------
 # 1. Load
 # ---------------------------------------------------------------------------
-def load_manifest(path: Path = MANIFEST_PATH) -> dict:
+def load_manifest(path: Path | None = None) -> dict:
     """Read manifest.json: {"file.txt": {"title": ..., "section": ..., "url": ...}}."""
+    path = path or MANIFEST_PATH
     if not path.exists():
-        print(f"WARNING: no manifest at {path}; titles will come from file names.")
+        print(f"WARNING: no manifest at {path}; using file headers or defaults.")
         return {}
     with open(path, encoding="utf-8") as f:
         return json.load(f)
 
 
-def load_document(path: Path, manifest: dict) -> dict | None:
-    """Read one .txt file and attach its manifest metadata."""
-    text = path.read_text(encoding="utf-8").strip()
-    if not text:
-        print(f"WARNING: {path.name} is empty; skipping.")
-        return None
+def parse_header(raw: str) -> tuple[dict, str]:
+    """Split a data-prep file into (header metadata, page content).
+    Files without a CONTENT: line are returned unchanged with empty metadata."""
+    if "CONTENT:" not in raw:
+        return {}, raw.strip()
+    head, content = raw.split("CONTENT:", 1)
+    meta = {}
+    for line in head.splitlines():
+        key, sep, value = line.partition(":")
+        if sep and key.strip().upper() in HEADER_FIELDS:
+            meta[HEADER_FIELDS[key.strip().upper()]] = value.strip()
+    return meta, content.strip()
 
-    meta = manifest.get(path.name)
-    if meta is None:
-        print(f"WARNING: {path.name} is not in manifest.json; using defaults.")
-        meta = {}
+
+def make_document(raw: str, source_file: str, overrides: dict | None = None) -> dict | None:
+    """Build a document dict from raw file text.
+    Metadata priority: overrides (manifest or API form fields) > file header > defaults."""
+    header, text = parse_header(raw)
+    if not text:
+        print(f"WARNING: {source_file} has no content; skipping.")
+        return None
+    overrides = {k: v for k, v in (overrides or {}).items() if v}
+
+    def pick(field: str, default: str) -> str:
+        return overrides.get(field) or header.get(field) or default
 
     # Chroma metadata values cannot be None, so every field gets a string.
     return {
-        "source_file": path.name,
+        "source_file": source_file,
         "text": text,
-        "title": meta.get("title") or path.stem.replace("_", " ").title(),
-        "section": meta.get("section") or "",
-        "url": meta.get("url") or "",
+        "title": pick("title", Path(source_file).stem.replace("_", " ").title()),
+        "section": pick("section", ""),
+        "url": pick("url", ""),
     }
+
+
+def load_document(path: Path, manifest: dict) -> dict | None:
+    """Read one .txt file and attach its metadata."""
+    raw = path.read_text(encoding="utf-8")
+    doc = make_document(raw, path.name, manifest.get(path.name))
+    if doc and not doc["url"]:
+        print(f"WARNING: {path.name} has no URL (not in manifest.json and no SOURCE: header).")
+    return doc
 
 
 def load_documents(docs_dir: Path = DOCS_DIR, manifest: dict | None = None) -> list[dict]:
@@ -143,7 +193,11 @@ def get_model():
     global _model
     if _model is None:
         from sentence_transformers import SentenceTransformer
-
+        try:
+            from transformers.utils import logging as hf_logging
+            hf_logging.disable_progress_bar()
+        except Exception:
+            pass
         _model = SentenceTransformer(MODEL_NAME)
     return _model
 
@@ -188,37 +242,100 @@ def store_document_chunks(collection, source_file: str, chunks: list[dict],
     )
 
 
+def collection_stats(collection) -> dict[str, int]:
+    """Chunk count per source file currently stored in the collection."""
+    counts: dict[str, int] = {}
+    for meta in collection.get(include=["metadatas"])["metadatas"]:
+        name = (meta or {}).get("source_file", "?")
+        counts[name] = counts.get(name, 0) + 1
+    return dict(sorted(counts.items()))
+
+
+def print_stats(collection) -> None:
+    counts = collection_stats(collection)
+    print(f"{COLLECTION}: {len(counts)} files, {sum(counts.values())} chunks")
+    for name, n in counts.items():
+        print(f"  {name:<40} {n:>4} chunks")
+
+
 # ---------------------------------------------------------------------------
 # Pipeline
 # ---------------------------------------------------------------------------
-def ingest_documents(docs: list[dict], collection, chunker_name: str = "length",
-                     model=None) -> dict:
-    """Chunk, embed and store a list of loaded documents. Returns stats.
-    The /ingest API endpoint can call this with a single document."""
+def ingest_document(doc: dict, collection, chunker_name: str = "length",
+                    model=None) -> dict:
+    """Chunk, embed and store one loaded document. Returns stats for that file."""
     chunker = get_chunker(chunker_name)
     model = model or get_model()
-    stats = {"files": 0, "chunks": 0, "chunk_s": 0.0, "embed_s": 0.0, "store_s": 0.0}
 
+    t0 = time.perf_counter()
+    chunks = chunk_document(doc, chunker, chunker_name)
+    t1 = time.perf_counter()
+    if not chunks:
+        return {"source_file": doc["source_file"], "chunks": 0,
+                "chunk_s": t1 - t0, "embed_s": 0.0, "store_s": 0.0}
+    vectors = embed([c["text"] for c in chunks], model)
+    t2 = time.perf_counter()
+    store_document_chunks(collection, doc["source_file"], chunks, vectors)
+    t3 = time.perf_counter()
+
+    return {"source_file": doc["source_file"], "chunks": len(chunks),
+            "chunk_s": t1 - t0, "embed_s": t2 - t1, "store_s": t3 - t2}
+
+
+def ingest_documents(docs: list[dict], collection, chunker_name: str = "length",
+                     model=None) -> dict:
+    """Ingest a list of loaded documents, printing one line per file. Returns totals."""
+    model = model or get_model()
+    totals = {"files": 0, "chunks": 0, "chunk_s": 0.0, "embed_s": 0.0, "store_s": 0.0}
     for doc in docs:
-        t0 = time.perf_counter()
-        chunks = chunk_document(doc, chunker, chunker_name)
-        t1 = time.perf_counter()
-        if not chunks:
-            print(f"  {doc['source_file']:<32} no chunks; skipped")
+        s = ingest_document(doc, collection, chunker_name, model)
+        took = s["chunk_s"] + s["embed_s"] + s["store_s"]
+        if not s["chunks"]:
+            print(f"  {doc['source_file']:<40} no chunks; skipped")
             continue
-        vectors = embed([c["text"] for c in chunks], model)
-        t2 = time.perf_counter()
-        store_document_chunks(collection, doc["source_file"], chunks, vectors)
-        t3 = time.perf_counter()
+        totals["files"] += 1
+        for k in ("chunks", "chunk_s", "embed_s", "store_s"):
+            totals[k] += s[k]
+        print(f"  {doc['source_file']:<40} {s['chunks']:>4} chunks  ({took:.2f}s)")
+    return totals
 
-        stats["files"] += 1
-        stats["chunks"] += len(chunks)
-        stats["chunk_s"] += t1 - t0
-        stats["embed_s"] += t2 - t1
-        stats["store_s"] += t3 - t2
-        print(f"  {doc['source_file']:<32} {len(chunks):>4} chunks  ({t3 - t0:.2f}s)")
 
-    return stats
+def ingest_text(text: str, source_file: str, title: str | None = None,
+                section: str | None = None, url: str | None = None,
+                collection=None, model=None, chunker_name: str = "length") -> dict:
+    """Ingest one document from raw text (e.g. an uploaded file).
+
+    `text` may include the TITLE/SOURCE/CATEGORY/CONTENT header; title/section/url
+    arguments override the header when given. Re-ingesting the same source_file
+    replaces its previous chunks.
+
+    Returns: {"source_file", "title", "chunks", "seconds", "collection_total"}
+    """
+    start = time.perf_counter()
+    doc = make_document(text, source_file,
+                        {"title": title, "section": section, "url": url})
+    if doc is None:
+        raise ValueError(f"{source_file} has no content to ingest.")
+    collection = collection or get_collection()
+    s = ingest_document(doc, collection, chunker_name, model)
+    return {
+        "source_file": source_file,
+        "title": doc["title"],
+        "chunks": s["chunks"],
+        "seconds": round(time.perf_counter() - start, 3),
+        "collection_total": collection.count(),
+    }
+
+
+# ---------------------------------------------------------------------------
+# Command line
+# ---------------------------------------------------------------------------
+def load_model_verbose():
+    t = time.perf_counter()
+    print(f"Loading embedding model {MODEL_NAME} ...")
+    model = get_model()
+    print(f"Model ready ({time.perf_counter() - t:.1f}s)")
+    return model
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -228,21 +345,41 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument("--chunker", choices=["length", "semantic"], default="length")
     parser.add_argument("--docs", type=Path, default=DOCS_DIR,
                         help="folder of .txt files (default: data/docs)")
+    parser.add_argument("--file", type=Path,
+                        help="ingest a single .txt file instead of the whole folder")
+    parser.add_argument("--stats", action="store_true",
+                        help="show what's in the collection and exit")
     args = parser.parse_args(argv)
+
+    if args.stats:
+        print_stats(get_collection())
+        return
 
     start = time.perf_counter()
     print(f"Collection: {COLLECTION}  |  DB: {DB_PATH}  |  chunker: {args.chunker}")
+
+    if args.file:
+        if not args.file.is_file():
+            raise SystemExit(f"File not found: {args.file}")
+        before = get_collection(reset=args.reset).count()
+        model = load_model_verbose()
+        raw = args.file.read_text(encoding="utf-8")
+        manifest = load_manifest() if MANIFEST_PATH.exists() else {}
+        m = manifest.get(args.file.name, {})
+        result = ingest_text(raw, args.file.name, m.get("title"), m.get("section"),
+                             m.get("url"), model=model, chunker_name=args.chunker)
+        print("-" * 60)
+        print(f"Uploaded {result['source_file']} ({result['title']}): "
+              f"{result['chunks']} chunks in {result['seconds']:.2f}s")
+        print(f"Collection '{COLLECTION}': {before} -> {result['collection_total']} chunks")
+        return
 
     docs = load_documents(args.docs)
     print(f"Loaded {len(docs)} documents from {args.docs}")
     if not docs:
         return
 
-    t = time.perf_counter()
-    print(f"Loading embedding model {MODEL_NAME} ...")
-    model = get_model()
-    print(f"Model ready ({time.perf_counter() - t:.1f}s)")
-
+    model = load_model_verbose()
     collection = get_collection(reset=args.reset)
     stats = ingest_documents(docs, collection, args.chunker, model)
 
