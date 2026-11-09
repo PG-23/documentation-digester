@@ -8,6 +8,8 @@ from ingest.chunking import (
     _is_plain_heading,
     _is_underline_heading,
     _split_sections,
+    _strip_header,
+    _clean_heading,
     chunk,
     semantic_chunker,
 )
@@ -68,14 +70,68 @@ class TestSplitSections(unittest.TestCase):
         page = "Page\n\nEmpty part\n\nFilled part\n\nBody text."
         self.assertEqual(_split_sections(page), [("Page > Filled part", "Body text.")])
 
+HEADER_PAGE = """TITLE: Overview of Godot's Key Concepts
+
+SOURCE: https://docs.godotengine.org/en/stable/key_concepts_overview.html
+
+CATEGORY: Getting started / Introduction
+
+CONTENT:
+
+Godot uses four core concepts.
+
+**1. Nodes:**
+
+Nodes are the basic building blocks.
+"""
+
+
+class TestHeaderFormat(unittest.TestCase):
+    def test_strip_header(self):
+        title, content = _strip_header(HEADER_PAGE)
+        self.assertEqual(title, "Overview of Godot's Key Concepts")
+        self.assertNotIn("SOURCE:", content)
+        self.assertNotIn("CONTENT:", content)
+        self.assertTrue(content.strip().startswith("Godot uses four core concepts."))
+
+    def test_page_without_header_is_unchanged(self):
+        text = (DOCS / "signals.txt").read_text()
+        self.assertEqual(_strip_header(text), ("", text))
+
+    def test_clean_heading(self):
+        self.assertEqual(_clean_heading("**1. Nodes:**"), "1. Nodes")
+        self.assertEqual(_clean_heading("**What Is a Game Engine?**"), "What Is a Game Engine?")
+        self.assertEqual(_clean_heading("## Signals"), "Signals")
+        self.assertEqual(_clean_heading("Using signals"), "Using signals")
+
+    def test_header_page_sections(self):
+        self.assertEqual(_split_sections(HEADER_PAGE), [
+            ("Overview of Godot's Key Concepts", "Godot uses four core concepts."),
+            ("Overview of Godot's Key Concepts > 1. Nodes", "Nodes are the basic building blocks."),
+        ])
+
+    def test_no_header_or_markdown_leaks_into_real_chunks(self):
+        for f in DOCS.glob("*.txt"):
+            with self.subTest(file=f.name):
+                for c in semantic_chunker(f.read_text()):
+                    for junk in ("TITLE:", "SOURCE:", "CATEGORY:", "CONTENT:"):
+                        self.assertNotIn(junk, c)
+                    self.assertNotIn("**", c.split("\n\n", 1)[0])
+
+
+
 
 class TestSemanticChunker(unittest.TestCase):
-    def test_one_chunk_per_section_on_real_pages(self):
+    def test_real_pages_chunks_fit_and_start_with_heading(self):
         for f in DOCS.glob("*.txt"):
             with self.subTest(file=f.name):
                 text = f.read_text()
-                chunks = semantic_chunker(text)
-                self.assertEqual(len(chunks), len(_split_sections(text)))
+                headings = {h for h, _ in _split_sections(text)}
+                for c in semantic_chunker(text):
+                    self.assertLessEqual(len(c), CHUNK_SIZE)
+                    self.assertIn(c.split("\n\n", 1)[0], headings)
+
+    
 
     def test_long_section_is_split_and_keeps_heading(self):
         chunks = semantic_chunker(LONG_PAGE)

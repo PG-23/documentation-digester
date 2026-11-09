@@ -18,8 +18,35 @@ UNDERLINE_RE = re.compile(r'^([=\-~*^"+#`])\1{2,}\s*$')
 
 NOT_HEADING_ENDING = (".",",",";",":","!")
 CODE_CHARS = set("(){}=;<>[]")
-BULLETS = ("- ", "* ", "• ")
+BULLETS = ("- ", "* ", "• ")# Files may start with:  TITLE: ... / SOURCE: ... / CATEGORY: ... / CONTENT:
+HEADER_KEYS = ("TITLE:", "SOURCE:", "CATEGORY:")
 
+def _strip_header(text:str) -> tuple[str,str]:
+    """Remove the TITLE/SOURCE/CATEGORY/CONTENT: header if the page has one.
+
+    Returns (page_title, content). Pages without a header come back unchanged
+    with page_title"""
+    if not text.lstrip().startswith("TITLE:"):
+        return "", text
+    lines = text.splitlines()
+    title = ""
+    for i, line in enumerate(lines):
+        s = line.strip()
+        if s.startswith("TITLE:"):
+            title = s[len("TITLE:"):].strip()
+        elif s == "CONTENT:":
+            return title, "\n".join(lines[i+1:])
+        elif s and not s.startswith(HEADER_KEYS):
+            break
+    content = [l for l in lines if not l.strip().startswith(HEADER_KEYS)]
+    return title, "\n".join(content)
+
+def _clean_heading(line:str) -> str:
+    s = line.strip().lstrip("#").strip()
+    s = s.strip("*").strip()
+    return s.rstrip(":").strip()
+             
+            
 def _is_blank(lines: list[str],i:int) -> bool:
     """True if index i is outside the list or the line is empty."""
     return i < 0 or i >= len(lines) or not lines[i].strip()
@@ -67,9 +94,10 @@ def _split_sections(text:str) -> list[tuple[str,str]]:
     ("Using signals > Connecting a signal in code", "You can also connect ...").
     Text before the first heading gets heading_path "".
     """
+    page_title, text = _strip_header(text)
     lines = text.splitlines()
     sections:list[tuple[str,str]] = []
-    path: list[str] = []
+    path: list[str] = [page_title] if page_title else []
     underline_levels: list[str] = []
     body: list[str] = []
 
@@ -84,7 +112,7 @@ def _split_sections(text:str) -> list[tuple[str,str]]:
     while i < len(lines):
         if _is_underline_heading(lines, i):
             flush()
-            title = lines[i].strip()
+            title = _clean_heading(lines[i])
             char = lines[i+1].strip()[0]
             if char not in underline_levels:
                 underline_levels.append(char)
@@ -94,7 +122,7 @@ def _split_sections(text:str) -> list[tuple[str,str]]:
             continue
         if _is_plain_heading(lines, i):
             flush()
-            title = lines[i].strip()
+            title = _clean_heading(lines[i])
             # First heading = page title (level 0); every later one is level 1
             path = [title] if not path else path[:1] + [title]
             i += 1
