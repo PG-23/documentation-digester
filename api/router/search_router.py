@@ -7,13 +7,13 @@ def get_vector_store(request: Request):
     return request.app.state.vector_store
 
 @router.get("/search")
-def search(
+async def search(
     query: str,
     k: int = Query(default=3, ge=1, le=20),
     vector_store: Chroma = Depends(get_vector_store)
 ):
 
-    docs = vector_store.similarity_search_with_relevance_scores(query, k)
+    docs = await vector_store.asimilarity_search_with_relevance_scores(query, k)
     
     return {
         "query": query,
