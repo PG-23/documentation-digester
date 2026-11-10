@@ -1,5 +1,5 @@
 from pathlib import Path
-
+import time
 from fastapi import APIRouter, HTTPException
 
 from ingest.ingest import ingest_documents, load_documents, get_collection, get_model
@@ -21,6 +21,8 @@ HOLDOUT will hit the holdout directory for testing purposes
 """
 @router.post("/ingestion")
 async def ingestion(place: str | None = None):
+    start_time = time.perf_counter()
+
     collection = get_collection(reset = False)
     model = get_model()
 
@@ -33,4 +35,6 @@ async def ingestion(place: str | None = None):
     else:
         raise HTTPException(status_code=400, detail="Please use the built in files to query.")
 
-    return {"data": returned}
+    execution = time.perf_counter() - start_time
+
+    return {"data": returned, "execution_time": execution}

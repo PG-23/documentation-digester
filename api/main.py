@@ -7,12 +7,14 @@ from langchain_huggingface import HuggingFaceEmbeddings
 from .router.search_router import router as search_router
 from .router.ingestion_router import router as ingestion_router
 from .router.operations_router import router as operations_router
+from fastapi.middleware.cors import CORSMiddleware
 
 ROOT = Path(__file__).resolve().parents[1]
 DB_PATH = ROOT / "chroma_db"
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+
     embeddings = HuggingFaceEmbeddings(
         model_name="sentence-transformers/all-MiniLM-L6-v2",
         encode_kwargs={"normalize_embeddings": True}
@@ -27,6 +29,12 @@ async def lifespan(app: FastAPI):
     yield
 
 app = FastAPI(lifespan=lifespan) 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:4200"],
+    allow_methods=["GET", "POST"],
+    allow_headers=["*"],
+)
 
 app.include_router(search_router)
 app.include_router(ingestion_router)
