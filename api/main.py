@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
 from .router.search_router import router as search_router
+from .router.ingestion_router import router as ingestion_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -23,3 +24,4 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan) 
 
 app.include_router(search_router)
+app.include_router(ingestion_router)
