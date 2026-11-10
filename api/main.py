@@ -1,10 +1,14 @@
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 from fastapi import FastAPI
 from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
 from .router.search_router import router as search_router
 from .router.ingestion_router import router as ingestion_router
+
+ROOT = Path(__file__).resolve().parents[1]
+DB_PATH = ROOT / "chroma_db"
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -16,7 +20,7 @@ async def lifespan(app: FastAPI):
     app.state.vector_store = Chroma(
         collection_name="godot_docs",
         embedding_function=embeddings,
-        persist_directory="chroma_db/"
+        persist_directory=DB_PATH
     )
 
     yield

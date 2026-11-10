@@ -25,11 +25,11 @@ async def ingestion(place: str | None = None):
     model = get_model()
 
     if place is None or place == "DOCS":
-        returned = documents = load_documents(DOCS_DIR)
-        ingest_documents(documents, collection)
+        documents = load_documents(DOCS_DIR)
+        returned = ingest_documents(documents, collection, "length", model)
     elif place == "HOLDOUT":
-        returned = documents = load_documents(HOLDOUT_DIR)
-        ingest_documents(documents, collection)
+        documents = load_documents(HOLDOUT_DIR)
+        returned = ingest_documents(documents, collection, "length", model)
     else:
         raise ValueError("Please use the built in files to query.")
 
