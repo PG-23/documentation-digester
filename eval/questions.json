@@ -1,1 +1,177 @@
-[]
+[
+  {
+    "id": "q01",
+    "question": "Is Godot free to use, and can I look at its source code?",
+    "expected_source_file": "introduction_to_godot.txt",
+    "expected_heading": "Godot's History and Development",
+    "style": "paraphrase"
+  },
+  {
+    "id": "q02",
+    "question": "Which editor tool helps me find out why my game is running slowly?",
+    "expected_source_file": "introduction_to_godot.txt",
+    "expected_heading": "The Godot Editor",
+    "style": "paraphrase"
+  },
+  {
+    "id": "q03",
+    "question": "What is a game engine and what systems does it provide?",
+    "expected_source_file": "introduction_to_godot.txt",
+    "expected_heading": "What Is a Game Engine?",
+    "style": "keyword"
+  },
+  {
+    "id": "q04",
+    "question": "Which programming basics should I understand before I start making games with Godot?",
+    "expected_source_file": "introduction_to_godot.txt",
+    "expected_heading": "Programming Knowledge",
+    "style": "paraphrase"
+  },
+  {
+    "id": "q05",
+    "question": "How do different parts of a game notify each other when something happens?",
+    "expected_source_file": "key_concepts_overview.txt",
+    "expected_heading": "4. Signals",
+    "style": "paraphrase"
+  },
+  {
+    "id": "q06",
+    "question": "What is a scene in Godot?",
+    "expected_source_file": "key_concepts_overview.txt",
+    "expected_heading": "2. Scenes",
+    "style": "keyword"
+  },
+  {
+    "id": "q07",
+    "question": "How are nodes arranged into a hierarchy while the game is running?",
+    "expected_source_file": "key_concepts_overview.txt",
+    "expected_heading": "3. The Scene Tree",
+    "style": "paraphrase"
+  },
+  {
+    "id": "q08",
+    "question": "What are common reasons to write part of my game in native C or C++ code?",
+    "expected_source_file": "scripting_languages.txt",
+    "expected_heading": "C and C++ Through GDExtension",
+    "style": "paraphrase"
+  },
+  {
+    "id": "q09",
+    "question": "Is GDScript just Python, or is it a different language?",
+    "expected_source_file": "scripting_languages.txt",
+    "expected_heading": "GDScript",
+    "style": "paraphrase"
+  },
+  {
+    "id": "q10",
+    "question": "Can a Godot 4 C# project be exported to the web?",
+    "expected_source_file": "scripting_languages.txt",
+    "expected_heading": "C# and .NET",
+    "style": "keyword"
+  },
+  {
+    "id": "q11",
+    "question": "What does the res:// path refer to in a Godot project?",
+    "expected_source_file": "first_2d_game_project_setup.txt",
+    "expected_heading": "Creating a New Project",
+    "style": "keyword"
+  },
+  {
+    "id": "q12",
+    "question": "Where do I put the downloaded artwork and font files so the 2D game can use them?",
+    "expected_source_file": "first_2d_game_project_setup.txt",
+    "expected_heading": "Importing Game Assets",
+    "style": "paraphrase"
+  },
+  {
+    "id": "q13",
+    "question": "How do I set the width, height and stretch mode of the game window?",
+    "expected_source_file": "first_2d_game_project_setup.txt",
+    "expected_heading": "Configuring the Game Window",
+    "style": "keyword"
+  },
+  {
+    "id": "q14",
+    "question": "Do I need programming experience before following the 2D game tutorial?",
+    "expected_source_file": "your_first_2d_game.txt",
+    "expected_heading": "Why Start with 2D?",
+    "style": "paraphrase"
+  },
+  {
+    "id": "q15",
+    "question": "What does HUD stand for and what does it show?",
+    "expected_source_file": "your_first_2d_game.txt",
+    "expected_heading": "HUD Scene",
+    "style": "keyword"
+  },
+  {
+    "id": "q16",
+    "question": "How is the score updated and shown on screen in Dodge the Creeps?",
+    "expected_source_file": "your_first_2d_game.txt",
+    "expected_heading": "Scoring and User Interface",
+    "style": "keyword"
+  },
+  {
+    "id": "q17",
+    "question": "In the 2D dodging game, how do enemies keep appearing in different places instead of the same spot?",
+    "expected_source_file": "your_first_2d_game.txt",
+    "expected_heading": "Enemy Behavior and Spawning",
+    "style": "paraphrase"
+  },
+  {
+    "id": "q18",
+    "question": "How do I make the floor solid so the player can stand on it in 3D?",
+    "expected_source_file": "first_3d_game_setup.txt",
+    "expected_heading": "Creating the Ground with StaticBody3D",
+    "style": "paraphrase"
+  },
+  {
+    "id": "q19",
+    "question": "Objects land on my 3D floor but I can't see it. How do I make it visible?",
+    "expected_source_file": "first_3d_game_setup.txt",
+    "expected_heading": "Adding a Visible Floor with MeshInstance3D",
+    "style": "paraphrase"
+  },
+  {
+    "id": "q20",
+    "question": "How do I add sunlight and shadows to my 3D scene?",
+    "expected_source_file": "first_3d_game_setup.txt",
+    "expected_heading": "Adding Directional Lighting",
+    "style": "paraphrase"
+  },
+  {
+    "id": "q21",
+    "question": "What size should the BoxShape3D collision shape for the ground be?",
+    "expected_source_file": "first_3d_game_setup.txt",
+    "expected_heading": "Understanding CollisionShape3D",
+    "style": "keyword"
+  },
+  {
+    "id": "q22",
+    "question": "What are the X, Y and Z axes used for in a 3D game?",
+    "expected_source_file": "your_first_3d_game.txt",
+    "expected_heading": "Three-Dimensional Coordinates",
+    "style": "keyword"
+  },
+  {
+    "id": "q23",
+    "question": "How can I control which objects are allowed to bump into each other?",
+    "expected_source_file": "your_first_3d_game.txt",
+    "expected_heading": "Physics and Collision Detection",
+    "style": "paraphrase"
+  },
+  {
+    "id": "q24",
+    "question": "What extra things do I have to deal with when moving from 2D to 3D development?",
+    "expected_source_file": "your_first_3d_game.txt",
+    "expected_heading": "How 3D Development Builds on 2D Concepts",
+    "style": "paraphrase"
+  },
+  {
+    "id": "q25",
+    "question": "Why should I add animations to my 3D character?",
+    "expected_source_file": "your_first_3d_game.txt",
+    "expected_heading": "Character Animation",
+    "style": "paraphrase"
+  }
+]
