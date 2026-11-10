@@ -6,6 +6,7 @@ from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
 from .router.search_router import router as search_router
 from .router.ingestion_router import router as ingestion_router
+from .router.operations_router import router as operations_router
 
 ROOT = Path(__file__).resolve().parents[1]
 DB_PATH = ROOT / "chroma_db"
@@ -29,3 +30,4 @@ app = FastAPI(lifespan=lifespan)
 
 app.include_router(search_router)
 app.include_router(ingestion_router)
+app.include_router(operations_router)

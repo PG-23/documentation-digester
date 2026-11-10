@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 
 from ingest.ingest import ingest_documents, load_documents, get_collection, get_model
 
@@ -31,6 +31,6 @@ async def ingestion(place: str | None = None):
         documents = load_documents(HOLDOUT_DIR)
         returned = ingest_documents(documents, collection, "length", model)
     else:
-        raise ValueError("Please use the built in files to query.")
+        raise HTTPException(status_code=400, detail="Please use the built in files to query.")
 
-    return {"status": 200, "data": returned}
+    return {"data": returned}

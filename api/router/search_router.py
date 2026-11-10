@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Query, Request, Depends
+from fastapi import APIRouter, HTTPException, Query, Request, Depends
 from langchain_chroma import Chroma
 
 router = APIRouter()
@@ -12,6 +12,8 @@ async def search(
     k: int = Query(default=3, ge=1, le=20),
     vector_store: Chroma = Depends(get_vector_store)
 ):
+    if not query.strip():
+        raise HTTPException(status_code=400, detail="Query cannot be empty.")
 
     docs = await vector_store.asimilarity_search_with_relevance_scores(query, k)
     
