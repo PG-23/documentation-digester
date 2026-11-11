@@ -47,7 +47,6 @@ const SUGGESTIONS = [
         </section>
       }
 
-      <button type="button" class="upload-btn" disabled title="Coming soon (U-3)">upload a page</button>
     </nav>
     `
 })

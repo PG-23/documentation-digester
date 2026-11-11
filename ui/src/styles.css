@@ -39,6 +39,7 @@
     --pill-bg: #fbf3b2;
     --pill-ink: #2b1d07;
     --shadow: 0 4px 18px rgba(176, 96, 20, 0.18);
+    --dialog-border: #b45309;
     --art: url('/images/sun.png') center / contain no-repeat;
     color-scheme: light;
 }
@@ -81,6 +82,7 @@
     --pill-bg: #4b3fe0;
     --pill-ink: #ffffff;
     --shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+    --dialog-border: #000000;
     --art: url('/images/moon.png') center / contain no-repeat;
     color-scheme: dark;
 }
@@ -420,9 +422,13 @@ button:disabled {
 }
 
 /* input bar */
-.composer { position: relative; z-index: 1; padding: 14px 40px 26px; }
+.composer { 
+    position: relative;
+    z-index: 1;
+    padding: 14px 40px 26px;
+}
 
-.composer form {
+.composer > form {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -450,7 +456,7 @@ button:disabled {
     outline: none;
 }
 
-.composer form:focus-within {
+.composer > form:focus-within {
     outline: 2px solid var(--accent);
     outline-offset: 3px;
 }
@@ -469,6 +475,88 @@ button:disabled {
   background: var(--send-bg);
   color: var(--send-ink);
   font-size: 18px;
+}
+
+/* upload dialog */
+app-upload-dialog {
+    display: contents;
+}
+
+.upload-dialog {
+    width: min(460px, calc(100vw - 32px));
+    padding: 0;
+    border: 2px solid var(--dialog-border);
+    border-radius: 20px;
+    background: var(--card-bg);
+    color: var(--ink);
+    box-shadow: var(--shadow);
+}
+
+.upload-dialog::backdrop {
+    background: rgba(10, 10, 30, 0 0.45);
+}
+
+.upload-form {
+    display: gird;
+    gap: 12px;
+    padding: 22px;
+}
+
+.upload-form h2 {
+    margin: 0;
+    font-size: 19px;
+}
+
+.hint {
+    margin: 0;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+/* labels on top, input below */
+.field {
+    display: grid;
+    gap: 4px;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.field input {
+    padding: 9px 12px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: transparent;
+    color: var(--ink);
+    font-size: 14px;
+}
+
+/* the checkmark chunks box */
+.upload-result {
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: var(--bot-bubble);
+    font-size: 14px;
+}
+
+/* cancel w/upload button */
+.dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+btn-primary {
+    padding: 9px 18px;
+    border-radius: 999px;
+    background: var(--input-bg);
+    color: var(--input-ink);
+    font-weight: 600;
+}
+
+.btn-secondary {
+    padding: 9px 18px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
 }
 
 /* for smaller screens, sidebar on top w/fewer extras */
