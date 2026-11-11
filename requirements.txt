@@ -7,3 +7,5 @@ langchain-huggingface
 fastapi
 uvicorn[standard]
 python-multipart
+matplotlib
+numpy

@@ -1,0 +1,1822 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-11-10T21:52:22+00:00",
+  "label": "bm25-semantic-1000",
+  "questions_sha256": "045f20de2d2081864e23b69365519b6dee8ed9bc2e324e0435af71f906f777df",
+  "config": {
+    "backend": "bm25",
+    "retriever": "Okapi BM25 (lexical, NOT sentence-transformer semantic search)",
+    "strategy": "semantic",
+    "chunk_size": 1000,
+    "chunk_overlap": 100,
+    "chunker_note": "Independent heading-aware/length diagnostic approximation; not ingest.chunking",
+    "chunk_count": 68,
+    "source_file_count": 7,
+    "index_build_seconds": 0.0025,
+    "latency_scope": "local Python BM25 query ranking only; excludes index construction, HTTP, embeddings and Chroma",
+    "not_semantic_model_baseline": true
+  },
+  "metrics": {
+    "question_count": 25,
+    "k": 5,
+    "hit_at_1_pct": 84.0,
+    "hit_at_5_pct": 96.0,
+    "mrr_at_5": 0.888,
+    "section_hit_at_5_pct": 88.0,
+    "section_mrr_at_5": 0.8,
+    "avg_latency_ms": 0.1,
+    "p95_latency_ms": 0.15,
+    "provenance_coverage_pct": 100.0,
+    "by_style": {
+      "keyword": {
+        "count": 9,
+        "hit_at_5_pct": 100.0,
+        "mrr_at_5": 0.9111
+      },
+      "paraphrase": {
+        "count": 16,
+        "hit_at_5_pct": 93.75,
+        "mrr_at_5": 0.875
+      }
+    },
+    "canonical_url_match_pct": 100.0,
+    "canonical_url_checked_results": 125
+  },
+  "questions": [
+    {
+      "id": "q01",
+      "question": "Is Godot free to use, and can I look at its source code?",
+      "style": "paraphrase",
+      "expected_source_file": "introduction_to_godot.txt",
+      "expected_heading": "Godot's History and Development",
+      "page_rank": 1,
+      "section_rank": 1,
+      "reciprocal_rank": 1.0,
+      "section_reciprocal_rank": 1.0,
+      "returned_count": 5,
+      "provenance_count": 5,
+      "top_results": [
+        {
+          "rank": 1,
+          "source_file": "introduction_to_godot.txt",
+          "title": "Introduction to Godot",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/introduction/introduction_to_godot.html",
+          "heading": "Godot's History and Development",
+          "chunk_index": 2,
+          "score": 12.48109,
+          "correct_page": true,
+          "correct_section_evidenced": true
+        },
+        {
+          "rank": 2,
+          "source_file": "introduction_to_godot.txt",
+          "title": "Introduction to Godot",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/introduction/introduction_to_godot.html",
+          "heading": "Key Takeaways",
+          "chunk_index": 7,
+          "score": 11.36726,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 3,
+          "source_file": "scripting_languages.txt",
+          "title": "Scripting Languages",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/scripting_languages.html",
+          "heading": "GDScript",
+          "chunk_index": 3,
+          "score": 8.8405,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 4,
+          "source_file": "introduction_to_godot.txt",
+          "title": "Introduction to Godot",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/introduction/introduction_to_godot.html",
+          "heading": "",
+          "chunk_index": 0,
+          "score": 8.81335,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 5,
+          "source_file": "scripting_languages.txt",
+          "title": "Scripting Languages",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/scripting_languages.html",
+          "heading": "GDScript",
+          "chunk_index": 4,
+          "score": 7.11049,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        }
+      ],
+      "latency_ms": 0.1775
+    },
+    {
+      "id": "q02",
+      "question": "Which editor tool helps me find out why my game is running slowly?",
+      "style": "paraphrase",
+      "expected_source_file": "introduction_to_godot.txt",
+      "expected_heading": "The Godot Editor",
+      "page_rank": 1,
+      "section_rank": 1,
+      "reciprocal_rank": 1.0,
+      "section_reciprocal_rank": 1.0,
+      "returned_count": 5,
+      "provenance_count": 5,
+      "top_results": [
+        {
+          "rank": 1,
+          "source_file": "introduction_to_godot.txt",
+          "title": "Introduction to Godot",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/introduction/introduction_to_godot.html",
+          "heading": "The Godot Editor",
+          "chunk_index": 3,
+          "score": 6.73905,
+          "correct_page": true,
+          "correct_section_evidenced": true
+        },
+        {
+          "rank": 2,
+          "source_file": "introduction_to_godot.txt",
+          "title": "Introduction to Godot",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/introduction/introduction_to_godot.html",
+          "heading": "Programming Languages",
+          "chunk_index": 4,
+          "score": 5.98636,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 3,
+          "source_file": "first_3d_game_setup.txt",
+          "title": "Setting Up the Game Area",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html",
+          "heading": "Understanding CollisionShape3D",
+          "chunk_index": 4,
+          "score": 5.19258,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 4,
+          "source_file": "introduction_to_godot.txt",
+          "title": "Introduction to Godot",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/introduction/introduction_to_godot.html",
+          "heading": "What Is a Game Engine?",
+          "chunk_index": 1,
+          "score": 4.33223,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 5,
+          "source_file": "key_concepts_overview.txt",
+          "title": "Overview of Godot's Key Concepts",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/introduction/key_concepts_overview.html",
+          "heading": "3. The Scene Tree",
+          "chunk_index": 3,
+          "score": 3.6855,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        }
+      ],
+      "latency_ms": 0.089
+    },
+    {
+      "id": "q03",
+      "question": "What is a game engine and what systems does it provide?",
+      "style": "keyword",
+      "expected_source_file": "introduction_to_godot.txt",
+      "expected_heading": "What Is a Game Engine?",
+      "page_rank": 1,
+      "section_rank": 1,
+      "reciprocal_rank": 1.0,
+      "section_reciprocal_rank": 1.0,
+      "returned_count": 5,
+      "provenance_count": 5,
+      "top_results": [
+        {
+          "rank": 1,
+          "source_file": "introduction_to_godot.txt",
+          "title": "Introduction to Godot",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/introduction/introduction_to_godot.html",
+          "heading": "What Is a Game Engine?",
+          "chunk_index": 1,
+          "score": 11.88647,
+          "correct_page": true,
+          "correct_section_evidenced": true
+        },
+        {
+          "rank": 2,
+          "source_file": "scripting_languages.txt",
+          "title": "Scripting Languages",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/scripting_languages.html",
+          "heading": "C and C++ Through GDExtension",
+          "chunk_index": 6,
+          "score": 6.78754,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 3,
+          "source_file": "scripting_languages.txt",
+          "title": "Scripting Languages",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/scripting_languages.html",
+          "heading": "Using Multiple Languages Together",
+          "chunk_index": 7,
+          "score": 6.32394,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 4,
+          "source_file": "introduction_to_godot.txt",
+          "title": "Introduction to Godot",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/introduction/introduction_to_godot.html",
+          "heading": "Key Takeaways",
+          "chunk_index": 7,
+          "score": 5.81098,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 5,
+          "source_file": "your_first_2d_game.txt",
+          "title": "Your First 2D Game",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_2d_game/index.html",
+          "heading": "HUD Scene",
+          "chunk_index": 6,
+          "score": 5.53853,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        }
+      ],
+      "latency_ms": 0.0914
+    },
+    {
+      "id": "q04",
+      "question": "Which programming basics should I understand before I start making games with Godot?",
+      "style": "paraphrase",
+      "expected_source_file": "introduction_to_godot.txt",
+      "expected_heading": "Programming Knowledge",
+      "page_rank": 2,
+      "section_rank": 2,
+      "reciprocal_rank": 0.5,
+      "section_reciprocal_rank": 0.5,
+      "returned_count": 5,
+      "provenance_count": 5,
+      "top_results": [
+        {
+          "rank": 1,
+          "source_file": "your_first_2d_game.txt",
+          "title": "Your First 2D Game",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_2d_game/index.html",
+          "heading": "Why Start with 2D?",
+          "chunk_index": 11,
+          "score": 15.47433,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 2,
+          "source_file": "introduction_to_godot.txt",
+          "title": "Introduction to Godot",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/introduction/introduction_to_godot.html",
+          "heading": "Programming Knowledge",
+          "chunk_index": 5,
+          "score": 8.5797,
+          "correct_page": true,
+          "correct_section_evidenced": true
+        },
+        {
+          "rank": 3,
+          "source_file": "introduction_to_godot.txt",
+          "title": "Introduction to Godot",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/introduction/introduction_to_godot.html",
+          "heading": "Programming Languages",
+          "chunk_index": 4,
+          "score": 7.40401,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 4,
+          "source_file": "scripting_languages.txt",
+          "title": "Scripting Languages",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/scripting_languages.html",
+          "heading": "GDScript",
+          "chunk_index": 3,
+          "score": 7.07175,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 5,
+          "source_file": "your_first_3d_game.txt",
+          "title": "Your First 3D Game",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/index.html",
+          "heading": "How 3D Development Builds on 2D Concepts",
+          "chunk_index": 10,
+          "score": 6.00828,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        }
+      ],
+      "latency_ms": 0.0797
+    },
+    {
+      "id": "q05",
+      "question": "How do different parts of a game notify each other when something happens?",
+      "style": "paraphrase",
+      "expected_source_file": "key_concepts_overview.txt",
+      "expected_heading": "4. Signals",
+      "page_rank": 1,
+      "section_rank": 1,
+      "reciprocal_rank": 1.0,
+      "section_reciprocal_rank": 1.0,
+      "returned_count": 5,
+      "provenance_count": 5,
+      "top_results": [
+        {
+          "rank": 1,
+          "source_file": "key_concepts_overview.txt",
+          "title": "Overview of Godot's Key Concepts",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/introduction/key_concepts_overview.html",
+          "heading": "4. Signals",
+          "chunk_index": 4,
+          "score": 16.04669,
+          "correct_page": true,
+          "correct_section_evidenced": true
+        },
+        {
+          "rank": 2,
+          "source_file": "first_2d_game_project_setup.txt",
+          "title": "Setting Up the Project",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_2d_game/01.project_setup.html",
+          "heading": "Organizing Scenes and Scripts",
+          "chunk_index": 4,
+          "score": 8.7267,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 3,
+          "source_file": "key_concepts_overview.txt",
+          "title": "Overview of Godot's Key Concepts",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/introduction/key_concepts_overview.html",
+          "heading": "2. Scenes",
+          "chunk_index": 2,
+          "score": 8.05526,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 4,
+          "source_file": "key_concepts_overview.txt",
+          "title": "Overview of Godot's Key Concepts",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/introduction/key_concepts_overview.html",
+          "heading": "3. The Scene Tree",
+          "chunk_index": 3,
+          "score": 6.74853,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 5,
+          "source_file": "first_3d_game_setup.txt",
+          "title": "Setting Up the Game Area",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html",
+          "heading": "Creating the Ground with StaticBody3D",
+          "chunk_index": 3,
+          "score": 6.68806,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        }
+      ],
+      "latency_ms": 0.0957
+    },
+    {
+      "id": "q06",
+      "question": "What is a scene in Godot?",
+      "style": "keyword",
+      "expected_source_file": "key_concepts_overview.txt",
+      "expected_heading": "2. Scenes",
+      "page_rank": 5,
+      "section_rank": 0,
+      "reciprocal_rank": 0.2,
+      "section_reciprocal_rank": 0.0,
+      "returned_count": 5,
+      "provenance_count": 5,
+      "top_results": [
+        {
+          "rank": 1,
+          "source_file": "first_3d_game_setup.txt",
+          "title": "Setting Up the Game Area",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html",
+          "heading": "Adding a Visible Floor with MeshInstance3D",
+          "chunk_index": 5,
+          "score": 5.21282,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 2,
+          "source_file": "scripting_languages.txt",
+          "title": "Scripting Languages",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/scripting_languages.html",
+          "heading": "C and C++ Through GDExtension",
+          "chunk_index": 6,
+          "score": 5.08207,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 3,
+          "source_file": "your_first_2d_game.txt",
+          "title": "Your First 2D Game",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_2d_game/index.html",
+          "heading": "HUD Scene",
+          "chunk_index": 6,
+          "score": 5.06942,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 4,
+          "source_file": "your_first_3d_game.txt",
+          "title": "Your First 3D Game",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/index.html",
+          "heading": "Character Animation",
+          "chunk_index": 8,
+          "score": 4.60174,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 5,
+          "source_file": "key_concepts_overview.txt",
+          "title": "Overview of Godot's Key Concepts",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/introduction/key_concepts_overview.html",
+          "heading": "3. The Scene Tree",
+          "chunk_index": 3,
+          "score": 4.51951,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        }
+      ],
+      "latency_ms": 0.0644
+    },
+    {
+      "id": "q07",
+      "question": "How are nodes arranged into a hierarchy while the game is running?",
+      "style": "paraphrase",
+      "expected_source_file": "key_concepts_overview.txt",
+      "expected_heading": "3. The Scene Tree",
+      "page_rank": 1,
+      "section_rank": 1,
+      "reciprocal_rank": 1.0,
+      "section_reciprocal_rank": 1.0,
+      "returned_count": 5,
+      "provenance_count": 5,
+      "top_results": [
+        {
+          "rank": 1,
+          "source_file": "key_concepts_overview.txt",
+          "title": "Overview of Godot's Key Concepts",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/introduction/key_concepts_overview.html",
+          "heading": "3. The Scene Tree",
+          "chunk_index": 3,
+          "score": 14.01285,
+          "correct_page": true,
+          "correct_section_evidenced": true
+        },
+        {
+          "rank": 2,
+          "source_file": "key_concepts_overview.txt",
+          "title": "Overview of Godot's Key Concepts",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/introduction/key_concepts_overview.html",
+          "heading": "How the Four Concepts Work Together",
+          "chunk_index": 5,
+          "score": 9.5832,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 3,
+          "source_file": "introduction_to_godot.txt",
+          "title": "Introduction to Godot",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/introduction/introduction_to_godot.html",
+          "heading": "What Is a Game Engine?",
+          "chunk_index": 1,
+          "score": 7.26005,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 4,
+          "source_file": "key_concepts_overview.txt",
+          "title": "Overview of Godot's Key Concepts",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/introduction/key_concepts_overview.html",
+          "heading": "Key Takeaways",
+          "chunk_index": 6,
+          "score": 6.65864,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 5,
+          "source_file": "your_first_2d_game.txt",
+          "title": "Your First 2D Game",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_2d_game/index.html",
+          "heading": "",
+          "chunk_index": 0,
+          "score": 5.53258,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        }
+      ],
+      "latency_ms": 0.1378
+    },
+    {
+      "id": "q08",
+      "question": "What are common reasons to write part of my game in native C or C++ code?",
+      "style": "paraphrase",
+      "expected_source_file": "scripting_languages.txt",
+      "expected_heading": "C and C++ Through GDExtension",
+      "page_rank": 1,
+      "section_rank": 1,
+      "reciprocal_rank": 1.0,
+      "section_reciprocal_rank": 1.0,
+      "returned_count": 5,
+      "provenance_count": 5,
+      "top_results": [
+        {
+          "rank": 1,
+          "source_file": "scripting_languages.txt",
+          "title": "Scripting Languages",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/scripting_languages.html",
+          "heading": "C and C++ Through GDExtension",
+          "chunk_index": 6,
+          "score": 20.12915,
+          "correct_page": true,
+          "correct_section_evidenced": true
+        },
+        {
+          "rank": 2,
+          "source_file": "introduction_to_godot.txt",
+          "title": "Introduction to Godot",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/introduction/introduction_to_godot.html",
+          "heading": "Programming Languages",
+          "chunk_index": 4,
+          "score": 9.194,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 3,
+          "source_file": "scripting_languages.txt",
+          "title": "Scripting Languages",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/scripting_languages.html",
+          "heading": "Using Multiple Languages Together",
+          "chunk_index": 7,
+          "score": 9.07041,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 4,
+          "source_file": "your_first_3d_game.txt",
+          "title": "Your First 3D Game",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/index.html",
+          "heading": "Character Animation",
+          "chunk_index": 8,
+          "score": 8.39445,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 5,
+          "source_file": "introduction_to_godot.txt",
+          "title": "Introduction to Godot",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/introduction/introduction_to_godot.html",
+          "heading": "The Godot Editor",
+          "chunk_index": 3,
+          "score": 8.3417,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        }
+      ],
+      "latency_ms": 0.1057
+    },
+    {
+      "id": "q09",
+      "question": "Is GDScript just Python, or is it a different language?",
+      "style": "paraphrase",
+      "expected_source_file": "scripting_languages.txt",
+      "expected_heading": "GDScript",
+      "page_rank": 1,
+      "section_rank": 2,
+      "reciprocal_rank": 1.0,
+      "section_reciprocal_rank": 0.5,
+      "returned_count": 5,
+      "provenance_count": 5,
+      "top_results": [
+        {
+          "rank": 1,
+          "source_file": "scripting_languages.txt",
+          "title": "Scripting Languages",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/scripting_languages.html",
+          "heading": "Key Takeaways",
+          "chunk_index": 8,
+          "score": 10.71678,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 2,
+          "source_file": "scripting_languages.txt",
+          "title": "Scripting Languages",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/scripting_languages.html",
+          "heading": "GDScript",
+          "chunk_index": 3,
+          "score": 10.68771,
+          "correct_page": true,
+          "correct_section_evidenced": true
+        },
+        {
+          "rank": 3,
+          "source_file": "scripting_languages.txt",
+          "title": "Scripting Languages",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/scripting_languages.html",
+          "heading": "Choosing a Programming Language",
+          "chunk_index": 2,
+          "score": 9.36984,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 4,
+          "source_file": "scripting_languages.txt",
+          "title": "Scripting Languages",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/scripting_languages.html",
+          "heading": "Using Multiple Languages Together",
+          "chunk_index": 7,
+          "score": 8.36215,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 5,
+          "source_file": "scripting_languages.txt",
+          "title": "Scripting Languages",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/scripting_languages.html",
+          "heading": "C# and .NET",
+          "chunk_index": 5,
+          "score": 6.9333,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        }
+      ],
+      "latency_ms": 0.0738
+    },
+    {
+      "id": "q10",
+      "question": "Can a Godot 4 C# project be exported to the web?",
+      "style": "keyword",
+      "expected_source_file": "scripting_languages.txt",
+      "expected_heading": "C# and .NET",
+      "page_rank": 1,
+      "section_rank": 1,
+      "reciprocal_rank": 1.0,
+      "section_reciprocal_rank": 1.0,
+      "returned_count": 5,
+      "provenance_count": 5,
+      "top_results": [
+        {
+          "rank": 1,
+          "source_file": "scripting_languages.txt",
+          "title": "Scripting Languages",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/scripting_languages.html",
+          "heading": "C# and .NET",
+          "chunk_index": 5,
+          "score": 12.56419,
+          "correct_page": true,
+          "correct_section_evidenced": true
+        },
+        {
+          "rank": 2,
+          "source_file": "scripting_languages.txt",
+          "title": "Scripting Languages",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/scripting_languages.html",
+          "heading": "Key Takeaways",
+          "chunk_index": 8,
+          "score": 7.7916,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 3,
+          "source_file": "first_2d_game_project_setup.txt",
+          "title": "Setting Up the Project",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_2d_game/01.project_setup.html",
+          "heading": "Creating a New Project",
+          "chunk_index": 1,
+          "score": 6.47126,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 4,
+          "source_file": "scripting_languages.txt",
+          "title": "Scripting Languages",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/scripting_languages.html",
+          "heading": "Available Scripting Languages",
+          "chunk_index": 1,
+          "score": 6.30993,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 5,
+          "source_file": "scripting_languages.txt",
+          "title": "Scripting Languages",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/scripting_languages.html",
+          "heading": "Using Multiple Languages Together",
+          "chunk_index": 7,
+          "score": 5.34556,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        }
+      ],
+      "latency_ms": 0.0976
+    },
+    {
+      "id": "q11",
+      "question": "What does the res:// path refer to in a Godot project?",
+      "style": "keyword",
+      "expected_source_file": "first_2d_game_project_setup.txt",
+      "expected_heading": "Creating a New Project",
+      "page_rank": 1,
+      "section_rank": 1,
+      "reciprocal_rank": 1.0,
+      "section_reciprocal_rank": 1.0,
+      "returned_count": 5,
+      "provenance_count": 5,
+      "top_results": [
+        {
+          "rank": 1,
+          "source_file": "first_2d_game_project_setup.txt",
+          "title": "Setting Up the Project",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_2d_game/01.project_setup.html",
+          "heading": "Creating a New Project",
+          "chunk_index": 1,
+          "score": 14.39768,
+          "correct_page": true,
+          "correct_section_evidenced": true
+        },
+        {
+          "rank": 2,
+          "source_file": "first_2d_game_project_setup.txt",
+          "title": "Setting Up the Project",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_2d_game/01.project_setup.html",
+          "heading": "Key Takeaways",
+          "chunk_index": 6,
+          "score": 8.74387,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 3,
+          "source_file": "first_2d_game_project_setup.txt",
+          "title": "Setting Up the Project",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_2d_game/01.project_setup.html",
+          "heading": "Organizing Scenes and Scripts",
+          "chunk_index": 4,
+          "score": 7.9596,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 4,
+          "source_file": "scripting_languages.txt",
+          "title": "Scripting Languages",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/scripting_languages.html",
+          "heading": "Using Multiple Languages Together",
+          "chunk_index": 7,
+          "score": 6.29237,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 5,
+          "source_file": "scripting_languages.txt",
+          "title": "Scripting Languages",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/scripting_languages.html",
+          "heading": "C and C++ Through GDExtension",
+          "chunk_index": 6,
+          "score": 4.61794,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        }
+      ],
+      "latency_ms": 0.0937
+    },
+    {
+      "id": "q12",
+      "question": "Where do I put the downloaded artwork and font files so the 2D game can use them?",
+      "style": "paraphrase",
+      "expected_source_file": "first_2d_game_project_setup.txt",
+      "expected_heading": "Importing Game Assets",
+      "page_rank": 1,
+      "section_rank": 1,
+      "reciprocal_rank": 1.0,
+      "section_reciprocal_rank": 1.0,
+      "returned_count": 5,
+      "provenance_count": 5,
+      "top_results": [
+        {
+          "rank": 1,
+          "source_file": "first_2d_game_project_setup.txt",
+          "title": "Setting Up the Project",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_2d_game/01.project_setup.html",
+          "heading": "Importing Game Assets",
+          "chunk_index": 2,
+          "score": 16.42324,
+          "correct_page": true,
+          "correct_section_evidenced": true
+        },
+        {
+          "rank": 2,
+          "source_file": "your_first_2d_game.txt",
+          "title": "Your First 2D Game",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_2d_game/index.html",
+          "heading": "Player Movement and Input",
+          "chunk_index": 8,
+          "score": 8.51019,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 3,
+          "source_file": "first_2d_game_project_setup.txt",
+          "title": "Setting Up the Project",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_2d_game/01.project_setup.html",
+          "heading": "Creating a New Project",
+          "chunk_index": 1,
+          "score": 7.99505,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 4,
+          "source_file": "first_3d_game_setup.txt",
+          "title": "Setting Up the Game Area",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html",
+          "heading": "Creating the Ground with StaticBody3D",
+          "chunk_index": 3,
+          "score": 6.57517,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 5,
+          "source_file": "first_3d_game_setup.txt",
+          "title": "Setting Up the Game Area",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html",
+          "heading": "Adding a Visible Floor with MeshInstance3D",
+          "chunk_index": 5,
+          "score": 5.15979,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        }
+      ],
+      "latency_ms": 0.1141
+    },
+    {
+      "id": "q13",
+      "question": "How do I set the width, height and stretch mode of the game window?",
+      "style": "keyword",
+      "expected_source_file": "first_2d_game_project_setup.txt",
+      "expected_heading": "Configuring the Game Window",
+      "page_rank": 1,
+      "section_rank": 1,
+      "reciprocal_rank": 1.0,
+      "section_reciprocal_rank": 1.0,
+      "returned_count": 5,
+      "provenance_count": 5,
+      "top_results": [
+        {
+          "rank": 1,
+          "source_file": "first_2d_game_project_setup.txt",
+          "title": "Setting Up the Project",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_2d_game/01.project_setup.html",
+          "heading": "Configuring the Game Window",
+          "chunk_index": 3,
+          "score": 28.91594,
+          "correct_page": true,
+          "correct_section_evidenced": true
+        },
+        {
+          "rank": 2,
+          "source_file": "first_2d_game_project_setup.txt",
+          "title": "Setting Up the Project",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_2d_game/01.project_setup.html",
+          "heading": "Key Takeaways",
+          "chunk_index": 6,
+          "score": 5.02286,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 3,
+          "source_file": "first_3d_game_setup.txt",
+          "title": "Setting Up the Game Area",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html",
+          "heading": "Positioning the Ground",
+          "chunk_index": 6,
+          "score": 4.2575,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 4,
+          "source_file": "first_3d_game_setup.txt",
+          "title": "Setting Up the Game Area",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html",
+          "heading": "Creating the Ground with StaticBody3D",
+          "chunk_index": 3,
+          "score": 4.1589,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 5,
+          "source_file": "first_3d_game_setup.txt",
+          "title": "Setting Up the Game Area",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html",
+          "heading": "Adding a Visible Floor with MeshInstance3D",
+          "chunk_index": 5,
+          "score": 3.90827,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        }
+      ],
+      "latency_ms": 0.1102
+    },
+    {
+      "id": "q14",
+      "question": "Do I need programming experience before following the 2D game tutorial?",
+      "style": "paraphrase",
+      "expected_source_file": "your_first_2d_game.txt",
+      "expected_heading": "Why Start with 2D?",
+      "page_rank": 1,
+      "section_rank": 1,
+      "reciprocal_rank": 1.0,
+      "section_reciprocal_rank": 1.0,
+      "returned_count": 5,
+      "provenance_count": 5,
+      "top_results": [
+        {
+          "rank": 1,
+          "source_file": "your_first_2d_game.txt",
+          "title": "Your First 2D Game",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_2d_game/index.html",
+          "heading": "Why Start with 2D?",
+          "chunk_index": 11,
+          "score": 9.32028,
+          "correct_page": true,
+          "correct_section_evidenced": true
+        },
+        {
+          "rank": 2,
+          "source_file": "scripting_languages.txt",
+          "title": "Scripting Languages",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/scripting_languages.html",
+          "heading": "Choosing a Programming Language",
+          "chunk_index": 2,
+          "score": 7.65694,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 3,
+          "source_file": "your_first_2d_game.txt",
+          "title": "Your First 2D Game",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_2d_game/index.html",
+          "heading": "Programming Languages and Resources",
+          "chunk_index": 12,
+          "score": 7.32781,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 4,
+          "source_file": "first_2d_game_project_setup.txt",
+          "title": "Setting Up the Project",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_2d_game/01.project_setup.html",
+          "heading": "",
+          "chunk_index": 0,
+          "score": 7.06741,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 5,
+          "source_file": "first_3d_game_setup.txt",
+          "title": "Setting Up the Game Area",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html",
+          "heading": "",
+          "chunk_index": 0,
+          "score": 6.96656,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        }
+      ],
+      "latency_ms": 0.0908
+    },
+    {
+      "id": "q15",
+      "question": "What does HUD stand for and what does it show?",
+      "style": "keyword",
+      "expected_source_file": "your_first_2d_game.txt",
+      "expected_heading": "HUD Scene",
+      "page_rank": 1,
+      "section_rank": 1,
+      "reciprocal_rank": 1.0,
+      "section_reciprocal_rank": 1.0,
+      "returned_count": 5,
+      "provenance_count": 5,
+      "top_results": [
+        {
+          "rank": 1,
+          "source_file": "your_first_2d_game.txt",
+          "title": "Your First 2D Game",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_2d_game/index.html",
+          "heading": "HUD Scene",
+          "chunk_index": 6,
+          "score": 9.29545,
+          "correct_page": true,
+          "correct_section_evidenced": true
+        },
+        {
+          "rank": 2,
+          "source_file": "scripting_languages.txt",
+          "title": "Scripting Languages",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/scripting_languages.html",
+          "heading": "Using Multiple Languages Together",
+          "chunk_index": 7,
+          "score": 4.82956,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 3,
+          "source_file": "first_3d_game_setup.txt",
+          "title": "Setting Up the Game Area",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html",
+          "heading": "Creating the Ground with StaticBody3D",
+          "chunk_index": 3,
+          "score": 4.67646,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 4,
+          "source_file": "your_first_2d_game.txt",
+          "title": "Your First 2D Game",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_2d_game/index.html",
+          "heading": "Main Scene",
+          "chunk_index": 7,
+          "score": 4.57723,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 5,
+          "source_file": "your_first_2d_game.txt",
+          "title": "Your First 2D Game",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_2d_game/index.html",
+          "heading": "Key Takeaways",
+          "chunk_index": 13,
+          "score": 4.04986,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        }
+      ],
+      "latency_ms": 0.0708
+    },
+    {
+      "id": "q16",
+      "question": "How is the score updated and shown on screen in Dodge the Creeps?",
+      "style": "keyword",
+      "expected_source_file": "your_first_2d_game.txt",
+      "expected_heading": "Scoring and User Interface",
+      "page_rank": 1,
+      "section_rank": 0,
+      "reciprocal_rank": 1.0,
+      "section_reciprocal_rank": 0.0,
+      "returned_count": 5,
+      "provenance_count": 5,
+      "top_results": [
+        {
+          "rank": 1,
+          "source_file": "your_first_2d_game.txt",
+          "title": "Your First 2D Game",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_2d_game/index.html",
+          "heading": "Game Overview",
+          "chunk_index": 1,
+          "score": 13.30401,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 2,
+          "source_file": "your_first_2d_game.txt",
+          "title": "Your First 2D Game",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_2d_game/index.html",
+          "heading": "",
+          "chunk_index": 0,
+          "score": 7.99797,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 3,
+          "source_file": "your_first_2d_game.txt",
+          "title": "Your First 2D Game",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_2d_game/index.html",
+          "heading": "Key Takeaways",
+          "chunk_index": 13,
+          "score": 7.73762,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 4,
+          "source_file": "your_first_3d_game.txt",
+          "title": "Your First 3D Game",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/index.html",
+          "heading": "Game Overview",
+          "chunk_index": 1,
+          "score": 6.07354,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 5,
+          "source_file": "first_3d_game_setup.txt",
+          "title": "Setting Up the Game Area",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html",
+          "heading": "Positioning the Ground",
+          "chunk_index": 6,
+          "score": 5.81057,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        }
+      ],
+      "latency_ms": 0.0941
+    },
+    {
+      "id": "q17",
+      "question": "In the 2D dodging game, how do enemies keep appearing in different places instead of the same spot?",
+      "style": "paraphrase",
+      "expected_source_file": "your_first_2d_game.txt",
+      "expected_heading": "Enemy Behavior and Spawning",
+      "page_rank": 1,
+      "section_rank": 1,
+      "reciprocal_rank": 1.0,
+      "section_reciprocal_rank": 1.0,
+      "returned_count": 5,
+      "provenance_count": 5,
+      "top_results": [
+        {
+          "rank": 1,
+          "source_file": "your_first_2d_game.txt",
+          "title": "Your First 2D Game",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_2d_game/index.html",
+          "heading": "Enemy Behavior and Spawning",
+          "chunk_index": 9,
+          "score": 19.58238,
+          "correct_page": true,
+          "correct_section_evidenced": true
+        },
+        {
+          "rank": 2,
+          "source_file": "first_2d_game_project_setup.txt",
+          "title": "Setting Up the Project",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_2d_game/01.project_setup.html",
+          "heading": "Configuring the Game Window",
+          "chunk_index": 3,
+          "score": 7.93159,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 3,
+          "source_file": "first_2d_game_project_setup.txt",
+          "title": "Setting Up the Project",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_2d_game/01.project_setup.html",
+          "heading": "Organizing Scenes and Scripts",
+          "chunk_index": 4,
+          "score": 7.32086,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 4,
+          "source_file": "first_3d_game_setup.txt",
+          "title": "Setting Up the Game Area",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html",
+          "heading": "Adding a Visible Floor with MeshInstance3D",
+          "chunk_index": 5,
+          "score": 7.1868,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 5,
+          "source_file": "key_concepts_overview.txt",
+          "title": "Overview of Godot's Key Concepts",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/introduction/key_concepts_overview.html",
+          "heading": "4. Signals",
+          "chunk_index": 4,
+          "score": 6.38387,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        }
+      ],
+      "latency_ms": 0.1147
+    },
+    {
+      "id": "q18",
+      "question": "How do I make the floor solid so the player can stand on it in 3D?",
+      "style": "paraphrase",
+      "expected_source_file": "first_3d_game_setup.txt",
+      "expected_heading": "Creating the Ground with StaticBody3D",
+      "page_rank": 1,
+      "section_rank": 2,
+      "reciprocal_rank": 1.0,
+      "section_reciprocal_rank": 0.5,
+      "returned_count": 5,
+      "provenance_count": 5,
+      "top_results": [
+        {
+          "rank": 1,
+          "source_file": "first_3d_game_setup.txt",
+          "title": "Setting Up the Game Area",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html",
+          "heading": "Adding Directional Lighting",
+          "chunk_index": 7,
+          "score": 11.41825,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 2,
+          "source_file": "first_3d_game_setup.txt",
+          "title": "Setting Up the Game Area",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html",
+          "heading": "Creating the Ground with StaticBody3D",
+          "chunk_index": 3,
+          "score": 10.30449,
+          "correct_page": true,
+          "correct_section_evidenced": true
+        },
+        {
+          "rank": 3,
+          "source_file": "your_first_3d_game.txt",
+          "title": "Your First 3D Game",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/index.html",
+          "heading": "Character Animation",
+          "chunk_index": 8,
+          "score": 9.79783,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 4,
+          "source_file": "first_3d_game_setup.txt",
+          "title": "Setting Up the Game Area",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html",
+          "heading": "Adding a Visible Floor with MeshInstance3D",
+          "chunk_index": 5,
+          "score": 9.74604,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 5,
+          "source_file": "your_first_3d_game.txt",
+          "title": "Your First 3D Game",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/index.html",
+          "heading": "Scoring and Game Interface",
+          "chunk_index": 7,
+          "score": 8.67658,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        }
+      ],
+      "latency_ms": 0.1159
+    },
+    {
+      "id": "q19",
+      "question": "Objects land on my 3D floor but I can't see it. How do I make it visible?",
+      "style": "paraphrase",
+      "expected_source_file": "first_3d_game_setup.txt",
+      "expected_heading": "Adding a Visible Floor with MeshInstance3D",
+      "page_rank": 1,
+      "section_rank": 1,
+      "reciprocal_rank": 1.0,
+      "section_reciprocal_rank": 1.0,
+      "returned_count": 5,
+      "provenance_count": 5,
+      "top_results": [
+        {
+          "rank": 1,
+          "source_file": "first_3d_game_setup.txt",
+          "title": "Setting Up the Game Area",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html",
+          "heading": "Adding a Visible Floor with MeshInstance3D",
+          "chunk_index": 5,
+          "score": 15.3295,
+          "correct_page": true,
+          "correct_section_evidenced": true
+        },
+        {
+          "rank": 2,
+          "source_file": "first_3d_game_setup.txt",
+          "title": "Setting Up the Game Area",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html",
+          "heading": "Positioning the Ground",
+          "chunk_index": 6,
+          "score": 11.25737,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 3,
+          "source_file": "first_3d_game_setup.txt",
+          "title": "Setting Up the Game Area",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html",
+          "heading": "Creating the Ground with StaticBody3D",
+          "chunk_index": 3,
+          "score": 9.83274,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 4,
+          "source_file": "first_3d_game_setup.txt",
+          "title": "Setting Up the Game Area",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html",
+          "heading": "Adding Directional Lighting",
+          "chunk_index": 7,
+          "score": 9.27087,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 5,
+          "source_file": "first_3d_game_setup.txt",
+          "title": "Setting Up the Game Area",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html",
+          "heading": "The Final Scene Structure",
+          "chunk_index": 8,
+          "score": 7.21372,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        }
+      ],
+      "latency_ms": 0.1006
+    },
+    {
+      "id": "q20",
+      "question": "How do I add sunlight and shadows to my 3D scene?",
+      "style": "paraphrase",
+      "expected_source_file": "first_3d_game_setup.txt",
+      "expected_heading": "Adding Directional Lighting",
+      "page_rank": 1,
+      "section_rank": 1,
+      "reciprocal_rank": 1.0,
+      "section_reciprocal_rank": 1.0,
+      "returned_count": 5,
+      "provenance_count": 5,
+      "top_results": [
+        {
+          "rank": 1,
+          "source_file": "first_3d_game_setup.txt",
+          "title": "Setting Up the Game Area",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html",
+          "heading": "Adding Directional Lighting",
+          "chunk_index": 7,
+          "score": 9.54112,
+          "correct_page": true,
+          "correct_section_evidenced": true
+        },
+        {
+          "rank": 2,
+          "source_file": "first_3d_game_setup.txt",
+          "title": "Setting Up the Game Area",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html",
+          "heading": "Why This Setup Matters",
+          "chunk_index": 9,
+          "score": 6.06218,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 3,
+          "source_file": "first_3d_game_setup.txt",
+          "title": "Setting Up the Game Area",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html",
+          "heading": "",
+          "chunk_index": 0,
+          "score": 5.54472,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 4,
+          "source_file": "first_3d_game_setup.txt",
+          "title": "Setting Up the Game Area",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html",
+          "heading": "The Final Scene Structure",
+          "chunk_index": 8,
+          "score": 5.24482,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 5,
+          "source_file": "first_3d_game_setup.txt",
+          "title": "Setting Up the Game Area",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html",
+          "heading": "Key Takeaways",
+          "chunk_index": 10,
+          "score": 5.06691,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        }
+      ],
+      "latency_ms": 0.089
+    },
+    {
+      "id": "q21",
+      "question": "What size should the BoxShape3D collision shape for the ground be?",
+      "style": "keyword",
+      "expected_source_file": "first_3d_game_setup.txt",
+      "expected_heading": "Understanding CollisionShape3D",
+      "page_rank": 1,
+      "section_rank": 1,
+      "reciprocal_rank": 1.0,
+      "section_reciprocal_rank": 1.0,
+      "returned_count": 5,
+      "provenance_count": 5,
+      "top_results": [
+        {
+          "rank": 1,
+          "source_file": "first_3d_game_setup.txt",
+          "title": "Setting Up the Game Area",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html",
+          "heading": "Understanding CollisionShape3D",
+          "chunk_index": 4,
+          "score": 11.72818,
+          "correct_page": true,
+          "correct_section_evidenced": true
+        },
+        {
+          "rank": 2,
+          "source_file": "first_3d_game_setup.txt",
+          "title": "Setting Up the Game Area",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html",
+          "heading": "Adding a Visible Floor with MeshInstance3D",
+          "chunk_index": 5,
+          "score": 8.25118,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 3,
+          "source_file": "first_3d_game_setup.txt",
+          "title": "Setting Up the Game Area",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html",
+          "heading": "Positioning the Ground",
+          "chunk_index": 6,
+          "score": 8.15108,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 4,
+          "source_file": "first_3d_game_setup.txt",
+          "title": "Setting Up the Game Area",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html",
+          "heading": "Creating the Ground with StaticBody3D",
+          "chunk_index": 3,
+          "score": 7.61843,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 5,
+          "source_file": "first_3d_game_setup.txt",
+          "title": "Setting Up the Game Area",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html",
+          "heading": "Why This Setup Matters",
+          "chunk_index": 9,
+          "score": 6.90508,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        }
+      ],
+      "latency_ms": 0.1284
+    },
+    {
+      "id": "q22",
+      "question": "What are the X, Y and Z axes used for in a 3D game?",
+      "style": "keyword",
+      "expected_source_file": "your_first_3d_game.txt",
+      "expected_heading": "Three-Dimensional Coordinates",
+      "page_rank": 1,
+      "section_rank": 1,
+      "reciprocal_rank": 1.0,
+      "section_reciprocal_rank": 1.0,
+      "returned_count": 5,
+      "provenance_count": 5,
+      "top_results": [
+        {
+          "rank": 1,
+          "source_file": "your_first_3d_game.txt",
+          "title": "Your First 3D Game",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/index.html",
+          "heading": "Three-Dimensional Coordinates",
+          "chunk_index": 3,
+          "score": 17.48656,
+          "correct_page": true,
+          "correct_section_evidenced": true
+        },
+        {
+          "rank": 2,
+          "source_file": "first_3d_game_setup.txt",
+          "title": "Setting Up the Game Area",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html",
+          "heading": "Adding a Visible Floor with MeshInstance3D",
+          "chunk_index": 5,
+          "score": 13.3008,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 3,
+          "source_file": "your_first_3d_game.txt",
+          "title": "Your First 3D Game",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/index.html",
+          "heading": "Key Takeaways",
+          "chunk_index": 11,
+          "score": 11.94444,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 4,
+          "source_file": "first_3d_game_setup.txt",
+          "title": "Setting Up the Game Area",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html",
+          "heading": "Understanding CollisionShape3D",
+          "chunk_index": 4,
+          "score": 10.68361,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 5,
+          "source_file": "first_3d_game_setup.txt",
+          "title": "Setting Up the Game Area",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html",
+          "heading": "Positioning the Ground",
+          "chunk_index": 6,
+          "score": 5.78383,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        }
+      ],
+      "latency_ms": 0.1511
+    },
+    {
+      "id": "q23",
+      "question": "How can I control which objects are allowed to bump into each other?",
+      "style": "paraphrase",
+      "expected_source_file": "your_first_3d_game.txt",
+      "expected_heading": "Physics and Collision Detection",
+      "page_rank": 1,
+      "section_rank": 1,
+      "reciprocal_rank": 1.0,
+      "section_reciprocal_rank": 1.0,
+      "returned_count": 5,
+      "provenance_count": 5,
+      "top_results": [
+        {
+          "rank": 1,
+          "source_file": "your_first_3d_game.txt",
+          "title": "Your First 3D Game",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/index.html",
+          "heading": "Physics and Collision Detection",
+          "chunk_index": 5,
+          "score": 10.6459,
+          "correct_page": true,
+          "correct_section_evidenced": true
+        },
+        {
+          "rank": 2,
+          "source_file": "your_first_3d_game.txt",
+          "title": "Your First 3D Game",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/index.html",
+          "heading": "Enemy Design and Spawning",
+          "chunk_index": 6,
+          "score": 9.17284,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 3,
+          "source_file": "key_concepts_overview.txt",
+          "title": "Overview of Godot's Key Concepts",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/introduction/key_concepts_overview.html",
+          "heading": "How the Four Concepts Work Together",
+          "chunk_index": 5,
+          "score": 7.79298,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 4,
+          "source_file": "your_first_3d_game.txt",
+          "title": "Your First 3D Game",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/index.html",
+          "heading": "Three-Dimensional Coordinates",
+          "chunk_index": 3,
+          "score": 7.42571,
+          "correct_page": true,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 5,
+          "source_file": "key_concepts_overview.txt",
+          "title": "Overview of Godot's Key Concepts",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/introduction/key_concepts_overview.html",
+          "heading": "Key Takeaways",
+          "chunk_index": 6,
+          "score": 6.73691,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        }
+      ],
+      "latency_ms": 0.0987
+    },
+    {
+      "id": "q24",
+      "question": "What extra things do I have to deal with when moving from 2D to 3D development?",
+      "style": "paraphrase",
+      "expected_source_file": "your_first_3d_game.txt",
+      "expected_heading": "How 3D Development Builds on 2D Concepts",
+      "page_rank": 0,
+      "section_rank": 0,
+      "reciprocal_rank": 0.0,
+      "section_reciprocal_rank": 0.0,
+      "returned_count": 5,
+      "provenance_count": 5,
+      "top_results": [
+        {
+          "rank": 1,
+          "source_file": "your_first_2d_game.txt",
+          "title": "Your First 2D Game",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_2d_game/index.html",
+          "heading": "Why Start with 2D?",
+          "chunk_index": 11,
+          "score": 13.37249,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 2,
+          "source_file": "introduction_to_godot.txt",
+          "title": "Introduction to Godot",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/introduction/introduction_to_godot.html",
+          "heading": "",
+          "chunk_index": 0,
+          "score": 7.19595,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 3,
+          "source_file": "scripting_languages.txt",
+          "title": "Scripting Languages",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/step_by_step/scripting_languages.html",
+          "heading": "C# and .NET",
+          "chunk_index": 5,
+          "score": 6.54138,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 4,
+          "source_file": "introduction_to_godot.txt",
+          "title": "Introduction to Godot",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/introduction/introduction_to_godot.html",
+          "heading": "What Is a Game Engine?",
+          "chunk_index": 1,
+          "score": 6.45325,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 5,
+          "source_file": "first_3d_game_setup.txt",
+          "title": "Setting Up the Game Area",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html",
+          "heading": "Adding a Visible Floor with MeshInstance3D",
+          "chunk_index": 5,
+          "score": 6.41927,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        }
+      ],
+      "latency_ms": 0.0996
+    },
+    {
+      "id": "q25",
+      "question": "Why should I add animations to my 3D character?",
+      "style": "paraphrase",
+      "expected_source_file": "your_first_3d_game.txt",
+      "expected_heading": "Character Animation",
+      "page_rank": 2,
+      "section_rank": 2,
+      "reciprocal_rank": 0.5,
+      "section_reciprocal_rank": 0.5,
+      "returned_count": 5,
+      "provenance_count": 5,
+      "top_results": [
+        {
+          "rank": 1,
+          "source_file": "your_first_2d_game.txt",
+          "title": "Your First 2D Game",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_2d_game/index.html",
+          "heading": "Why Start with 2D?",
+          "chunk_index": 11,
+          "score": 9.14258,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 2,
+          "source_file": "your_first_3d_game.txt",
+          "title": "Your First 3D Game",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/index.html",
+          "heading": "Character Animation",
+          "chunk_index": 8,
+          "score": 6.41518,
+          "correct_page": true,
+          "correct_section_evidenced": true
+        },
+        {
+          "rank": 3,
+          "source_file": "first_3d_game_setup.txt",
+          "title": "Setting Up the Game Area",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html",
+          "heading": "Why This Setup Matters",
+          "chunk_index": 9,
+          "score": 6.29904,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 4,
+          "source_file": "your_first_2d_game.txt",
+          "title": "Your First 2D Game",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_2d_game/index.html",
+          "heading": "What the Tutorial Teaches",
+          "chunk_index": 2,
+          "score": 5.92396,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        },
+        {
+          "rank": 5,
+          "source_file": "first_3d_game_setup.txt",
+          "title": "Setting Up the Game Area",
+          "url": "https://docs.godotengine.org/en/stable/getting_started/first_3d_game/01.game_setup.html",
+          "heading": "",
+          "chunk_index": 0,
+          "score": 5.55237,
+          "correct_page": false,
+          "correct_section_evidenced": false
+        }
+      ],
+      "latency_ms": 0.0696
+    }
+  ]
+}
