@@ -20,21 +20,31 @@ By default this will load everything inside of the DOCS folder.
 HOLDOUT will hit the holdout directory for testing purposes
 """
 @router.post("/ingestion")
-async def ingestion(place: str | None = None):
+def ingestion(place: str | None = None):
     start_time = time.perf_counter()
 
-    collection = get_collection(reset = False)
+    collection = get_collection(reset=False)
     model = get_model()
 
-    if place is None or place == "DOCS":
-        documents = load_documents(DOCS_DIR)
-        returned = ingest_documents(documents, collection, "length", model)
-    elif place == "HOLDOUT":
-        documents = load_documents(HOLDOUT_DIR)
-        returned = ingest_documents(documents, collection, "length", model)
+    if place is None or place.lower() == "docs":
+        folder = DOCS_DIR
+    elif place.lower() == "holdout":
+        folder = HOLDOUT_DIR
     else:
         raise HTTPException(status_code=400, detail="Please use the built in files to query.")
 
+    count_before = collection.count()
+
+    documents = load_documents(folder)
+    returned = ingest_documents(documents, collection, "semantic", model)
+
+    count_after = collection.count()
     execution = time.perf_counter() - start_time
 
-    return {"data": returned, "execution_time": execution}
+    return {
+        "data": returned,
+        "collection_before": count_before,
+        "collection_after": count_after,
+        "chunks_added": count_after - count_before,
+        "execution_time": round(execution, 3),
+    }
