@@ -1,5 +1,6 @@
 // chat area: the sun/moon thingy in the background
 
+import { UploadDialogComponent } from "../upload/upload-dialog.component";
 import { Component, inject, signal, ElementRef, computed, effect, viewChild } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { DecimalPipe, PercentPipe } from "@angular/common";
@@ -11,7 +12,7 @@ import { SearchResult } from "../models";
 
     host: { class: 'chat' },
 
-    imports: [FormsModule, DecimalPipe, PercentPipe],
+    imports: [UploadDialogComponent, FormsModule, DecimalPipe, PercentPipe],
     template: `
         <div class="art" aria-hidden="true"></div>
 
@@ -110,8 +111,10 @@ import { SearchResult } from "../models";
             }
             </select>
 
-            <button type="submit" class="send" [disabled]="store.busy() || !query.trim()" aria-label="Search">➤</button>
+             <!-- opens the upload pop-up, upload = a handle to the dialog component -->
+            <button type="button" class="upload-btn" (click)="upload.open()">📎 upload a page</button>
         </form>
+        <app-upload-dialog #upload />
         </div>
     `,
 })
