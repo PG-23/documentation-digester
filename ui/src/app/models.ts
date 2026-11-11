@@ -29,12 +29,3 @@ export interface IngestResponse {
     chunks_added: number;
     took_ms?: number;      // this is optional but how long the ingestion took
 }
-
-// shape the real /search endpoint returns right now (dennis api)
-export interface ApiSearchResponse {
-    query: string;
-    results: {
-        content: string;    // chunk text
-        metadata: Record<string, any>;      // title, section, url, source_file, chunk_index & chunker
-    }[];
-}

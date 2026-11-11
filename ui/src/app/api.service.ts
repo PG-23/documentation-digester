@@ -3,8 +3,8 @@
 
 import { Injectable, inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable, delay, of, map } from "rxjs";
-import { IngestMeta, IngestResponse, SearchResponse, ApiSearchResponse, SearchResult } from "./models";
+import { Observable, delay, of } from "rxjs";
+import { IngestMeta, IngestResponse, SearchResponse } from "./models";
 import { MOCK_SEARCH } from "./mock-data";
 
 // true = use fake data, false = call real FastAPI backend
@@ -22,23 +22,7 @@ export class ApiService {
         if(USE_MOCK) return of({ ...MOCK_SEARCH, query }).pipe(delay(300));
 
         //real mode: the api uses GET w/query params -> /search?query=...&k=...
-        return this.http
-        .get<ApiSearchResponse>('/search', { params: { query, k }})
-        .pipe(
-            // map() converts the api shape into OUR searchResponse shape
-            map((res) => ({
-                query: res.query,
-                results: res.results.map((r): SearchResult => ({
-                    text: r.content,        // content -> text
-                    title: r.metadata['title'] ?? 'Untitled',       // pull fields out of "metadata"
-                    section: r.metadata['url'] ?? '',
-                    url: r.metadata['url'] ?? '',
-                    source_file: r.metadata['source_file'] ?? '',
-                    chunk_index: r.metadata['chunk_index'] ?? 0,
-                    // no source yet, leave it out for nooww
-                })),
-            })),
-        );
+        return this.http.get<SearchResponse>('/search', { params: { query, k }});
     }
 
     // ingest(): uploads a txt file n its metadata to /ingest so the backend can chunk it
