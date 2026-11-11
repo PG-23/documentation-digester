@@ -1,8 +1,9 @@
 from pathlib import Path
 import time
-from fastapi import APIRouter, HTTPException
+import os
+from fastapi import APIRouter, Form, HTTPException, File, UploadFile
 
-from ingest.ingest import ingest_documents, load_documents, get_collection, get_model
+from ingest.ingest import ingest_documents, load_documents, get_collection, get_model, ingest_text
 
 router = APIRouter()
 
@@ -47,4 +48,35 @@ def ingestion(place: str | None = None):
         "collection_after": count_after,
         "chunks_added": count_after - count_before,
         "execution_time": round(execution, 3),
+    }
+
+@router.post("/ingest")
+async def ingest_file(
+    file: UploadFile = File(...),
+    title: str = Form(...),
+    section: str = Form(...),
+    url: str = Form(...)
+):
+    # Get the text from the document
+    extension = os.path.splitext(file.filename or "")[1].lower()
+
+    # Check valid document
+    if extension in {".txt", ".md"}:
+        content = await file.read()
+        text = content.decode("utf-8")
+    else:
+        raise HTTPException(status_code=400, detail="Upload a .txt file")
+
+    # Send Request
+    collection = get_collection(reset=False)
+    model = get_model()
+    details = ingest_text(text, file.filename, title, section, url, collection, model, "semantic")
+
+    # Return info
+    return{
+        "source_file": file.filename,
+        "title": title,
+        "chunks": details.get("chunks", 0),
+        "seconds": details.get("seconds", 0),
+        "collection_total": details.get("collection_total", 0)
     }
