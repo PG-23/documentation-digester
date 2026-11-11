@@ -5,6 +5,11 @@ from fastapi import APIRouter, Form, HTTPException, File, UploadFile
 
 from ingest.ingest import ingest_documents, load_documents, get_collection, get_model, ingest_text
 
+# For pdf/doc extraction
+import docx2txt
+from io import BytesIO
+from pypdf import PdfReader
+
 router = APIRouter()
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -60,21 +65,30 @@ async def ingest_file(
     # Get the text from the document
     extension = os.path.splitext(file.filename or "")[1].lower()
 
-    # Get decoder and text
-    if extension in {".txt", ".md"}:
-        decoder = "utf-8"
-    else:
-        raise HTTPException(status_code=400, detail="Upload a .txt or .md file")
-
+    # Decode and read exceptions
     try:
-        content = await file.read()
-        text = content.decode(decoder)
+        if extension in {".txt", ".md", ".rst"}:
+            content = await file.read()
+            text = content.decode("utf-8")
+        elif extension == ".docx":
+            text = docx2txt.process(file.file)
+        elif extension == ".pdf":
+            reader = PdfReader(BytesIO(file.file.read()))
+
+            text = "\n".join(page.extract_text() or "" for page in reader.pages)
+
+            if not text.strip():
+                raise HTTPException(status_code=400, detail="No valid text in file")
+        else:
+            raise HTTPException(status_code=400, detail="Must be a valid file type.")
     except UnicodeDecodeError:
         raise HTTPException(status_code=400, detail="Please use up to date files.")
     except ValueError:
         raise HTTPException(status_code=500, detail="File closed please try again.")
-    except Exception:
-        raise HTTPException(status_code=400, detail="Something went wrong, please try again.")
+    except HTTPException as e:
+        raise HTTPException(status_code=e.status_code, detail=e.detail)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail="Something went wrong, please try again. {}".format(e))
 
     # Send Request
     collection = get_collection(reset=False)
