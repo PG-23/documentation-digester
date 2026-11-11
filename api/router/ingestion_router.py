@@ -60,12 +60,21 @@ async def ingest_file(
     # Get the text from the document
     extension = os.path.splitext(file.filename or "")[1].lower()
 
-    # Check valid document
+    # Get decoder and text
     if extension in {".txt", ".md"}:
-        content = await file.read()
-        text = content.decode("utf-8")
+        decoder = "utf-8"
     else:
-        raise HTTPException(status_code=400, detail="Upload a .txt file")
+        raise HTTPException(status_code=400, detail="Upload a .txt or .md file")
+
+    try:
+        content = await file.read()
+        text = content.decode(decoder)
+    except UnicodeDecodeError:
+        raise HTTPException(status_code=400, detail="Please use up to date files.")
+    except ValueError:
+        raise HTTPException(status_code=500, detail="File closed please try again.")
+    except Exception:
+        raise HTTPException(status_code=400, detail="Something went wrong, please try again.")
 
     # Send Request
     collection = get_collection(reset=False)
