@@ -22,7 +22,7 @@ from eval.run_evaluation import (
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--sizes", nargs="+", type=int, default=[300, 500, 800, 1000, 1200])
-    parser.add_argument("--strategies", nargs="+", choices=("length", "semantic"), default=["length", "semantic"])
+    parser.add_argument("--strategies", nargs="+", choices=("length", "semantic","hybrid"), default=["length", "semantic"])
     parser.add_argument("-k", type=int, default=5)
     parser.add_argument("--overlap", type=int, default=None, help="fixed overlap; default is min(100, size // 8)")
     parser.add_argument("--output-dir", type=Path, default=ROOT / "eval" / "results" / "experiments")
