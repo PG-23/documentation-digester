@@ -14,7 +14,25 @@ import { SearchResult } from "../models";
 
     imports: [UploadDialogComponent, FormsModule, DecimalPipe, PercentPipe],
     template: `
-        <div class="art" aria-hidden="true"></div>
+        <!-- file cabinet art: closed cabinet w/3 drawers that slide out one at a time -->
+        <div class="art cabinet" aria-hidden="true">
+
+          <!-- sunshine cabinet -->
+          <div class="cab-set set-sun">
+            <div class="layer cab-body"></div>
+            <div class="drawer-clip"><div class="layer drawer d1"></div></div>
+            <div class="drawer-clip"><div class="layer drawer d2"></div></div>
+            <div class="drawer-clip"><div class="layer drawer d3"></div></div>
+          </div>
+
+          <!-- midnight cabinet -->
+          <div class="cab-set set-moon">
+            <div class="layer cab-body"></div>
+            <div class="drawer-clip"><div class="layer drawer d1"></div></div>
+            <div class="drawer-clip"><div class="layer drawer d2"></div></div>
+            <div class="drawer-clip"><div class="layer drawer d3"></div></div>
+          </div>
+        </div>
 
         <div class="thread" #thread aria-live="polite">
 

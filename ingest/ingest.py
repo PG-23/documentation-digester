@@ -55,6 +55,7 @@ MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 
 CHUNK_SIZE = 800      # characters
 CHUNK_OVERLAP = 100   # characters
+DEFAULT_CHUNKER = "semantic"   # "semantic" (split by headings) or "length"
 
 HEADER_FIELDS = {"TITLE": "title", "SOURCE": "url", "CATEGORY": "section"}
 
@@ -160,26 +161,45 @@ def get_chunker(name: str):
     raise ValueError(f"Unknown chunker: {name!r} (use 'length' or 'semantic')")
 
 
+# def chunk_document(doc: dict, chunker, chunker_name: str) -> list[dict]:
+#     """Split one document and give every chunk a stable ID and full metadata."""
+#     chunks = []
+#     for i, piece in enumerate(chunker(doc["text"])):
+#         piece = piece.strip()
+#         if not piece:
+#             continue
+#         chunks.append({
+#             "id": f"{doc['source_file']}::{i}",   # stable: same file + index -> same ID
+#             "text": piece,
+#             "metadata": {
+#                 "title": doc["title"],
+#                 "section": doc["section"],
+#                 "url": doc["url"],
+#                 "source_file": doc["source_file"],
+#                 "chunk_index": i,
+#                 "chunker": chunker_name,
+#             },
+#         })
+#     return chunks
+
 def chunk_document(doc: dict, chunker, chunker_name: str) -> list[dict]:
-    """Split one document and give every chunk a stable ID and full metadata."""
-    chunks = []
-    for i, piece in enumerate(chunker(doc["text"])):
-        piece = piece.strip()
-        if not piece:
-            continue
-        chunks.append({
-            "id": f"{doc['source_file']}::{i}",   # stable: same file + index -> same ID
-            "text": piece,
-            "metadata": {
-                "title": doc["title"],
-                "section": doc["section"],
-                "url": doc["url"],
-                "source_file": doc["source_file"],
-                "chunk_index": i,
-                "chunker": chunker_name,
-            },
-        })
-    return chunks
+    """Split one document and give every chunk a stable ID and full metadata.
+
+    Uses chunk() from ingest/chunking.py, which also adds a "heading"
+    field (e.g. "Overview of Godot's Key Concepts > 1. Nodes") for semantic chunks.
+    """
+    from ingest.chunking import chunk
+
+    metadata = {k: doc[k] for k in ("title", "section", "url", "source_file")}
+    return [
+        {
+            "id": f"{doc['source_file']}::{d.metadata['chunk_index']}",   # stable: same file + index -> same ID
+            "text": d.page_content,
+            "metadata": {**d.metadata, "heading": d.metadata.get("heading", "")},
+        }
+        for d in chunk(doc["text"], metadata, strategy=chunker_name)
+    ]
+
 
 
 # ---------------------------------------------------------------------------
@@ -198,7 +218,7 @@ def get_model():
             hf_logging.disable_progress_bar()
         except Exception:
             pass
-        _model = SentenceTransformer(MODEL_NAME)
+        _model = SentenceTransformer(MODEL_NAME,device="cpu")
     return _model
 
 
@@ -261,7 +281,7 @@ def print_stats(collection) -> None:
 # ---------------------------------------------------------------------------
 # Pipeline
 # ---------------------------------------------------------------------------
-def ingest_document(doc: dict, collection, chunker_name: str = "length",
+def ingest_document(doc: dict, collection, chunker_name: str = DEFAULT_CHUNKER,
                     model=None) -> dict:
     """Chunk, embed and store one loaded document. Returns stats for that file."""
     chunker = get_chunker(chunker_name)
@@ -282,7 +302,7 @@ def ingest_document(doc: dict, collection, chunker_name: str = "length",
             "chunk_s": t1 - t0, "embed_s": t2 - t1, "store_s": t3 - t2}
 
 
-def ingest_documents(docs: list[dict], collection, chunker_name: str = "length",
+def ingest_documents(docs: list[dict], collection, chunker_name: str = DEFAULT_CHUNKER,
                      model=None) -> dict:
     """Ingest a list of loaded documents, printing one line per file. Returns totals."""
     model = model or get_model()
@@ -302,7 +322,7 @@ def ingest_documents(docs: list[dict], collection, chunker_name: str = "length",
 
 def ingest_text(text: str, source_file: str, title: str | None = None,
                 section: str | None = None, url: str | None = None,
-                collection=None, model=None, chunker_name: str = "length") -> dict:
+                collection=None, model=None, chunker_name: str = DEFAULT_CHUNKER) -> dict:
     """Ingest one document from raw text (e.g. an uploaded file).
 
     `text` may include the TITLE/SOURCE/CATEGORY/CONTENT header; title/section/url
@@ -342,7 +362,7 @@ def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description="Ingest Godot docs into ChromaDB.")
     parser.add_argument("--reset", action="store_true",
                         help="delete the collection before ingesting")
-    parser.add_argument("--chunker", choices=["length", "semantic"], default="length")
+    parser.add_argument("--chunker", choices=["length", "semantic"], default=DEFAULT_CHUNKER)
     parser.add_argument("--docs", type=Path, default=DOCS_DIR,
                         help="folder of .txt files (default: data/docs)")
     parser.add_argument("--file", type=Path,
