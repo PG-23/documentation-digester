@@ -1,5 +1,54 @@
 /* both themes: sunshine & midnight */
 
+/* registered colors so everything goes smooth, nothing to worry :P */
+@property --sidebar-from  { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --sidebar-to    { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --brand-bg      { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --brand-ink     { syntax: '<color>'; inherits: true; initial-value: black; }
+@property --panel-bg      { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --side-ink      { syntax: '<color>'; inherits: true; initial-value: black; }
+@property --side-muted    { syntax: '<color>'; inherits: true; initial-value: gray; }
+@property --new-ink       { syntax: '<color>'; inherits: true; initial-value: black; }
+@property --header-bg     { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --main-from     { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --main-to       { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --user-bubble   { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --user-ink      { syntax: '<color>'; inherits: true; initial-value: black; }
+@property --bot-bubble    { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --card-bg       { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --ink           { syntax: '<color>'; inherits: true; initial-value: black; }
+@property --muted         { syntax: '<color>'; inherits: true; initial-value: gray; }
+@property --line          { syntax: '<color>'; inherits: true; initial-value: gray; }
+@property --accent        { syntax: '<color>'; inherits: true; initial-value: black; }
+@property --score         { syntax: '<color>'; inherits: true; initial-value: black; }
+@property --input-bg      { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --input-ink     { syntax: '<color>'; inherits: true; initial-value: black; }
+@property --send-bg       { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --send-ink      { syntax: '<color>'; inherits: true; initial-value: black; }
+@property --pill-bg       { syntax: '<color>'; inherits: true; initial-value: transparent; }
+@property --pill-ink      { syntax: '<color>'; inherits: true; initial-value: black; }
+@property --dialog-border { syntax: '<color>'; inherits: true; initial-value: black; }
+
+/* how long each transition step takes!!! */
+:root {
+    --sky-time: 1.2s;
+    transition:
+        --sidebar-from var(--sky-time), --sidebar-to var(--sky-time),
+        --brand-bg var(--sky-time), --brand-ink var(--sky-time),
+        --panel-bg var(--sky-time), --side-ink var(--sky-time), --side-muted var(--sky-time),
+        --new-ink var(--sky-time), --header-bg var(--sky-time),
+        --main-from var(--sky-time), --main-to var(--sky-time),
+        --user-bubble var(--sky-time), --user-ink var(--sky-time),
+        --bot-bubble var(--sky-time), --card-bg var(--sky-time),
+        --ink var(--sky-time), --muted var(--sky-time), --line var(--sky-time),
+        --accent var(--sky-time), --score var(--sky-time),
+        --input-bg var(--sky-time), --input-ink var(--sky-time),
+        --send-bg var(--sky-time), --send-ink var(--sky-time),
+        --pill-bg var(--sky-time), --pill-ink var(--sky-time),
+        --dialog-border var(--sky-time);
+    transition-timing-function: ease-in-out;
+}
+
 /* sunshine (default) */
 :root,
 [data-theme='sunshine'] {
@@ -40,7 +89,6 @@
     --pill-ink: #2b1d07;
     --shadow: 0 4px 18px rgba(176, 96, 20, 0.18);
     --dialog-border: #b45309;
-    --art: url('/images/sun.png') center / contain no-repeat;
     color-scheme: light;
 }
 
@@ -83,8 +131,71 @@
     --pill-ink: #ffffff;
     --shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
     --dialog-border: #000000;
-    --art: url('/images/moon.png') center / contain no-repeat;
     color-scheme: dark;
+}
+
+/* the sunset to midnight */
+[data-theme='sunset'] {
+    --sidebar-from: #e8875f;
+    --sidebar-to: #b85a7a;
+    --brand-bg: #ffd2a8;
+    --brand-ink: #2b1220;
+    --panel-bg: #f6b993;
+    --side-ink: #2b1220;
+    --side-muted: #6b3a4a;
+    --new-ink: #2b1220;
+    --header-bg: #f08a5d;
+    --main-from: #ffb27a;
+    --main-to: #8e4f8f;
+    --user-bubble: #e86f5a;
+    --user-ink: #2b1220;
+    --bot-bubble: #f7c08e;
+    --card-bg: #fde3c8;
+    --ink: #2b1220;
+    --muted: #6b3a4a;
+    --line: #e7a989;
+    --accent: #8a2d4a;
+    --score: #e8664a;
+    --input-bg: #c8553d;
+    --input-ink: #fff3ea;
+    --send-bg: #ffe0b8;
+    --send-ink: #8a2d4a;
+    --pill-bg: #ffd2a8;
+    --pill-ink: #2b1220;
+    --dialog-border: #8a2d4a;
+    color-scheme: light;
+}
+
+/* the sunrise to sunshine */
+[data-theme='sunrise'] {
+    --sidebar-from: #5b4fa8;
+    --sidebar-to: #e88f8f;
+    --brand-bg: #ffc8b4;
+    --brand-ink: #24163a;
+    --panel-bg: #f3b8b0;
+    --side-ink: #24163a;
+    --side-muted: #5e4470;
+    --new-ink: #24163a;
+    --header-bg: #7a5fb0;
+    --main-from: #6f5fb8;
+    --main-to: #ffb38a;
+    --user-bubble: #b06ab3;
+    --user-ink: #ffffff;
+    --bot-bubble: #f6c7b6;
+    --card-bg: #fde7dc;
+    --ink: #24163a;
+    --muted: #5e4470;
+    --line: #e3aab0;
+    --accent: #7a2f6d;
+    --score: #ff8a6b;
+    --input-bg: #9b5fc0;
+    --input-ink: #ffffff;
+    --send-bg: #ffe28a;
+    --send-ink: #24163a;
+    --pill-bg: #ffc8b4;
+    --pill-ink: #24163a;
+    --dialog-border: #7a2f6d;
+    color-scheme: light;
 }
 
 /* base */
@@ -244,6 +355,32 @@ button:disabled {
     filter: brightness(1.05);
 }
 
+.pill-window {
+    display: block;
+    height: 1.5em;
+    line-height: 1.5em;
+    overflow: hidden;
+}
+
+.pill-track {
+    display: flex;
+    flex-direction: column;
+    transform: translateY(-50%);
+    transition: transform 2.4s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.pill-track.show-midnight {
+    transform: translateY(0);
+}
+
+.pill-label {
+    display: block;
+    height: 1.5em;
+    text-align: center;
+    white-space: nowrap;
+}
+
+
 /* chat */
 .chat {
     position: relative;
@@ -257,10 +394,139 @@ button:disabled {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: min(560px, 80%);
+    width: min(760px, 90%);
     aspect-ratio: 1 / 1;
-    background: var(--art);
     pointer-events: none;
+}
+
+/* file cabinet stuff */
+.cabinet .layer,
+.drawer-clip {
+    position: absolute;
+    inset: 0;
+}
+
+.cabinet .layer {
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+/* which cabinet color to go with based on theme */
+.cab-body {
+    background-image: var(--cabinet);
+}
+
+.d1 {
+    background-image: var(--drawer-1);
+}
+
+.d2 {
+    background-image: var(--drawer-2);
+}
+
+.d3 {
+    background-image: var(--drawer-3);
+}
+
+/* sunshine to midnight cross fade */
+.cab-set {
+    position: absolute;
+    inset: 0;
+    transition: opacity var(--sky-time) ease-in-out;
+}
+
+.set-sun {
+    --cabinet: url('/images/sun_drawer.png');
+    --drawer-1: url('/images/just_drawer.png');
+    --drawer-2: url('/images/just_drawer2.png');
+    --drawer-3: url('/images/just_drawer3.png');
+}
+
+.set-moon {
+    --cabinet: url('/images/moon_drawer.png');
+    --drawer-1: url('/images/m.just_drawer.png');
+    --drawer-2: url('/images/m.just_drawer2.png');
+    --drawer-3: url('/images/m.just_drawer3.png');
+}
+
+.set-sun {
+    opacity: 1;
+}
+
+.set-moon {
+    opacity: 0;
+}
+
+/* as theme is setting/rising, png half fade */
+[data-theme='sunset'] .set-sun,
+[data-theme='sunset'] .set-moon,
+[data-theme='sunrise'] .set-sun,
+[data-theme='sunrise'] .set-moon {
+    opacity: 0.6;
+}
+
+[data-theme='midnight'] .set-sun  {
+    opacity: 0;
+}
+[data-theme='midnight'] .set-moon {
+    opacity: 1;
+}
+
+.drawer-clip {
+    clip-path: inset(0 0 0 43%);
+}
+
+.drawer {
+    opacity: 0;
+    animation: drawer-slide 15s ease-in-out infinite;
+}
+
+.d2 {
+    animation-delay: 5s; /*middle opens after top */
+}
+
+.d3 {
+    animation-delay: 10s; /* bottom opens last */
+}
+
+@keyframes drawer-slide {
+    0%, 100% {
+        opacity: 0;
+        transform: translate(-11%, -3.4%);
+    }
+    2% {
+        opacity: 1;
+        transform: translate(-10.5%, -3.25%);
+    }
+    12%, 22% {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+    31% {
+        opacity: 1;
+        transform: translate(-10.5%, -3.25%);
+    }
+    33% {
+        opacity: 0;
+        transform: translate(-11%, -3.4%);
+    }
+}
+
+/* sun/moon animation */
+@keyframes art-breathe {
+    0%, 100% { 
+        opacity: 0.45;
+        transform: translate(-50%, -50%) scale(0.92);
+    }
+    50%    { 
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.05);
+    } 
+}
+
+.art {
+    animation: art-breathe 7s ease-in-out infinite;
 }
 
 .thread {
@@ -573,4 +839,6 @@ btn-primary {
 
 @media (prefers-reduced-motion: reduce) {
   * { scroll-behavior: auto !important; transition: none !important; }
+  .art { animation: none !important; } /* no animation if motion is off */
+  .drawer { animation: none !important; }   /* drawers stay closed */
 }
