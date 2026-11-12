@@ -119,8 +119,8 @@ def evaluate_local(questions: list[dict], strategy: str = "length", chunk_size: 
     except ImportError as exc:
         raise RuntimeError("Install project dependencies first: pip install -r requirements.txt") from exc
 
-    if strategy not in ("length", "semantic"):
-        raise ValueError("strategy must be length or semantic")
+    if strategy not in ("length", "semantic","hybrid"):
+        raise ValueError("strategy must be length or semantic or hybrid")
     if chunk_size < 250:
         raise ValueError("chunk size must be at least 250 characters")
     if overlap is None:
