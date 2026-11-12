@@ -1,9 +1,9 @@
 // page layout: sidebar on left, top bar (theme pill) n chat on right
 
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { SearchComponent } from './search/search.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { ThemeService } from './theme.service';
+import { ThemeService, SKY_STEP_MS } from './theme.service';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +21,13 @@ import { ThemeService } from './theme.service';
             (click)="themes.toggle()"
             [attr.aria-label]="'Theme: ' + themes.theme() + '. Click to switch.'"
           >
-            {{ themes.theme() === 'sunshine' ? '☀️ sunshine' : '🌙 midnight' }}
+          <span class="pill-window" aria-hidden="true">
+              <!-- show-midnight class = slide down to the midnight label -->
+              <span class="pill-track" [class.show-midnight]="themes.theme() === 'midnight'">
+                <span class="pill-label">🌙</span>   <!-- top -->
+                <span class="pill-label">☀️</span>   <!-- bottom -->
+              </span>
+            </span>
           </button>
         </header>
 
@@ -33,4 +39,20 @@ import { ThemeService } from './theme.service';
 
 export class App {
   protected themes = inject(ThemeService);
+
+  // flips right away, starting the roll
+  protected pillShowMidnight = signal(this.themes.theme() === 'midnight');
+
+  private switching = false;
+
+  switchTheme() {
+    if(this.switching) return;
+    this.switching = true;
+
+    this.pillShowMidnight.update((v) => !v);
+    this.themes.toggle();
+
+    // the entire switch (sunshine -> sunset -> midnight)
+    setTimeout(() => (this.switching = false), SKY_STEP_MS * 2);
+  }
 }
