@@ -14,11 +14,11 @@ import { IngestResponse } from "../models";
     <dialog #dlg class="upload-dialog" (close)="reset()" aria-labelledby="upload-title">
       <form class="upload-form" (ngSubmit)="upload()">
         <h2 id="upload-title">upload a page</h2>
-        <p class="hint">pick a .txt docs page, it gets chunked, embedded and added to the vector db</p>
+        <p class="hint">pick a .txt, .pdf, or .docx docs page, it gets chunked, embedded and added to the vector db</p>
 
         <label class="field">
           File
-          <input #fileInput type="file" accept=".txt,text/plain" (change)="pick($event)" />
+          <input #fileInput type="file" accept=".txt,.pdf,.docx,text/plain,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" (change)="pick($event)" />
         </label>
 
         <!-- this is optional, but if left blank, the backend uses the file's own header / file name -->
