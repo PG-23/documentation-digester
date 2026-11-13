@@ -1,0 +1,125 @@
+TITLE: Using NavigationAgents
+
+SOURCE: https://docs.godotengine.org/en/stable/tutorials/navigation/navigation_using_navigationagents.html
+
+CATEGORY: Navigation
+
+CONTENT:
+
+Godot NavigationAgents are helper nodes that provide functionality for pathfinding, path following, and agent avoidance. They help developers create characters and other moving objects that can navigate through a game environment.
+
+Godot provides two main types:
+- NavigationAgent2D: Used for navigation in 2D environments.
+- NavigationAgent3D: Used for navigation in 3D environments.
+
+NavigationAgents are commonly added as children of a character or other Node2D or Node3D-based actor. They communicate with Godot's NavigationServer to calculate paths and provide information that the parent character can use for movement.
+
+NavigationAgents are optional. Developers can also implement navigation functionality directly through the NavigationServer API using custom scripts.
+
+**Pathfinding:**
+
+Pathfinding is the process of calculating a route from one position to another while considering the available navigation area.
+
+A NavigationAgent calculates a path when its `target_position` property is assigned a global position.
+
+For example, a character may need to move from its current location to a destination across a game level. The NavigationAgent uses the navigation map to determine a route.
+
+Several properties influence pathfinding:
+- `navigation_layers`: Determines which navigation layers the agent can use.
+- `pathfinding_algorithm`: Controls the algorithm used to search through navigation mesh polygons.
+- `path_postprocessing`: Determines how the calculated path is processed before being returned.
+- `simplify_path`: Determines whether less important path points should be removed.
+- `simplify_epsilon`: Controls the simplification tolerance.
+
+A navigation mesh describes the areas where characters are allowed to move. The agent uses this information to calculate a route through the available navigation space.
+
+**Path Following:**
+
+After a target position is assigned, the NavigationAgent provides the next position along the calculated path through the `get_next_path_position()` function.
+
+The parent character must use this position to determine how it should move.
+
+An important distinction is that the NavigationAgent does not automatically move the character. It calculates and provides navigation information, while the developer's movement script controls the actual movement.
+
+The typical process is:
+
+1. Assign a destination using `target_position`.
+2. Check whether navigation has finished using `is_navigation_finished()`.
+3. Retrieve the next path position using `get_next_path_position()`.
+4. Calculate the direction and velocity needed to move toward that position.
+5. Move the parent character using its movement code.
+6. Repeat the process during physics updates until the destination is reached.
+
+Godot recommends calling `get_next_path_position()` repeatedly from `_physics_process()` while the agent is following a path.
+
+**Important Path Distance Properties:**
+
+NavigationAgents use distance settings to determine when they have reached path positions or destinations.
+
+Important properties include:
+
+- `path_desired_distance`: Determines how close the agent must get to the next path position before advancing to the following position.
+- `target_desired_distance`: Determines how close the agent must get to its final destination before considering navigation complete.
+- `path_max_distance`: Determines how far the agent can move away from its ideal path before requesting a new path.
+
+These properties help control how accurately the agent follows a route.
+
+Incorrect distance settings can cause movement problems, such as characters repeatedly changing direction or moving backward.
+
+**Agent Avoidance:**
+
+NavigationAgent avoidance helps moving characters avoid collisions with other agents and navigation obstacles.
+
+To enable avoidance, developers must set the `enable_avoidance` property to `true`.
+
+The NavigationAgent also uses the `velocity` property to receive the character's current intended movement velocity.
+
+When avoidance is enabled, Godot calculates a safer movement velocity and sends the result through the `velocity_computed` signal.
+
+The movement script should use this safe velocity to move the parent character.
+
+Important avoidance properties include:
+
+- `radius`: Defines the physical size used for the agent's avoidance calculations.
+- `neighbor_distance`: Controls how far the agent searches for other agents.
+- `max_neighbors`: Limits how many nearby agents are considered.
+- `time_horizon_agents`: Controls how far into the future the system predicts interactions with other agents.
+- `time_horizon_obstacles`: Controls how far into the future the system predicts interactions with obstacles.
+- `avoidance_priority`: Controls which agents have priority when avoidance calculations are performed.
+
+Avoidance only considers other agents on the same navigation map that are also registered for avoidance.
+
+**Pathfinding Versus Avoidance:**
+
+Pathfinding and avoidance are related but perform different jobs.
+
+Pathfinding determines the route an agent should follow through the navigation mesh.
+
+Avoidance adjusts movement to reduce collisions with other moving agents and registered obstacles.
+
+Avoidance does not change the calculated navigation path. It is an additional movement feature that helps continuously moving characters navigate around one another.
+
+For example, multiple non-player characters may have different destinations but encounter one another while walking. Pathfinding calculates their routes, while avoidance helps them move around each other.
+
+**Common Navigation Problems:**
+
+Developers may encounter several problems when implementing NavigationAgents.
+
+- Empty paths: Requesting a path before the navigation map has synchronized can result in an empty path. Developers should wait for synchronization before requesting navigation.
+- Characters jittering: Requesting new paths too frequently can cause an agent to repeatedly switch between nearby positions.
+- Characters moving backward: An agent moving too quickly may pass a path point without satisfying its desired distance setting.
+- Incorrect movement: The parent character must use the navigation information correctly because the NavigationAgent does not move it automatically.
+
+Understanding the relationship between navigation updates, movement speed, and distance settings helps prevent these problems.
+
+**Key Takeaways:**
+
+- NavigationAgents provide pathfinding, path following, and avoidance functionality.
+- Godot provides NavigationAgent2D and NavigationAgent3D.
+- The `target_position` property specifies the destination.
+- `get_next_path_position()` retrieves the next position along a calculated path.
+- The parent character's script is responsible for actual movement.
+- Navigation updates should be handled through `_physics_process()`.
+- Navigation meshes define the areas available for pathfinding.
+- Avoidance uses the `enable_avoidance` property and `velocity_computed` signal.
+- Pathfinding and avoidance are separate systems that work together to improve character navigation.
