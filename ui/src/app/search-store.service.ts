@@ -20,7 +20,7 @@ export interface Conversation {
     messages: Message[];
 }
 
-const CHATS_KEY = 'dd-recent';
+const CHATS_KEY = 'dd-chats';
 const MAX_CHATS = 20;
 
 @Injectable({ providedIn: 'root' })
@@ -28,7 +28,7 @@ export class SearchStore {
     private api = inject(ApiService);
     private nextId = 1;
 
-    readonly chats = signal<Conversation[]>([]);  // saved chats, newest first
+    readonly chats = signal<Conversation[]>(this.loadChats());  // saved chats, newest first
     readonly activeId = signal<string| null>(null);  // chat currently open
     readonly messages = signal<Message[]>([]);      // messages of open chat
     readonly k = signal(5);  // how many results to ask for
