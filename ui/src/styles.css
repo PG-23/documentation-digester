@@ -811,7 +811,7 @@ app-upload-dialog {
     gap: 8px;
 }
 
-btn-primary {
+.btn-primary {
     padding: 9px 18px;
     border-radius: 999px;
     background: var(--input-bg);
