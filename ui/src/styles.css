@@ -825,6 +825,57 @@ app-upload-dialog {
     border: 1px solid var(--line);
 }
 
+/* recents (saved chats) */
+.recents {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+}
+
+.try {
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid var(--side-hover);
+}
+
+/* one chat: title button + delete × */
+    .chat-row {
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+}
+    .chat-row:hover,
+    .chat-row.active {
+    background: var(--side-hover);
+}
+
+.chat-title {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* × only shows on hover/keyboard focus */
+.del-btn {
+    padding: 4px 10px;
+    color: var(--side-muted);
+    font-size: 16px;
+    opacity: 0;
+}
+
+.chat-row:hover .del-btn,
+.del-btn:focus-visible {
+    opacity: 1;
+}
+
+.side-empty {
+    margin: 4px 8px;
+    font-size: 13px;
+    color: var(--side-muted);
+}
+
 /* for smaller screens, sidebar on top w/fewer extras */
 @media (max-width: 760px) {
   .shell { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
