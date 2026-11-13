@@ -9,3 +9,5 @@ uvicorn[standard]
 python-multipart
 matplotlib
 numpy
+docx2txt
+pypdf

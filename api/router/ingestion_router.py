@@ -59,7 +59,7 @@ def ingestion(place: str | None = None):
 async def ingest_file(
     file: UploadFile = File(...),
     title: str = Form(...),
-    section: str = Form(...),
+    section: str | None = Form(None),
     url: str = Form(...)
 ):
     # Get the text from the document
